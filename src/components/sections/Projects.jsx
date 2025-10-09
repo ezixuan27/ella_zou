@@ -22,7 +22,7 @@ export const Projects = () => {
         "Google Slides":"bg-[#FDE68A] text-[#ff5700] hover:bg-[#ffd700]",
 
         "VEX Robotics" :"bg-[#1d346f]/70 text-white hover:bg-[#1d346f]",
-        "Engineering Design Process":"bg-[#ffd3bb]/30 text-[#fa857c] hover:bg-[#fa857c]/70 hover:text-white",
+        "Engineering Design Process":"bg-[#ffd3bb]/60 text-[#fa857c] hover:bg-[#fa857c]/70 hover:text-white",
     };
 
     return (
@@ -62,7 +62,9 @@ export const Projects = () => {
                             </div>
 
                             <div className="flex justify-between items-center">
-                                <a href="https://oasis-2025-mudle.github.io/app/ " className="text-xl text-[#FF7B54]/90 hover:text-[#2C4E80] transition-colors my-4">
+                                <a href="https://oasis-2025-mudle.github.io/app/ " 
+                                className="text-xl text-[#FF7B54]/90 hover:text-[#2C4E80] transition-colors my-4"
+                                target="_blank">
                                     View Project
                                 </a>
                             </div>
@@ -91,7 +93,9 @@ export const Projects = () => {
                             </div>
 
                             <div className="flex justify-between items-center">
-                                <a href="https://github.com/ezixuan27/CS3500-OOD/tree/main/Calendar" className="text-xl text-[#FF7B54]/90 hover:text-[#2C4E80] transition-colors my-4">
+                                <a href="https://github.com/ezixuan27/CS3500-OOD/tree/main/Calendar" 
+                                className="text-xl text-[#FF7B54]/90 hover:text-[#2C4E80] transition-colors my-4"
+                                target="_blank">
                                     View Project
                                 </a>
                             </div>
@@ -104,9 +108,10 @@ export const Projects = () => {
                             </h3>
                             <p className="text-[#3B4859] mb-3 text-lg">
                                 I’m currently assisting with course AI agent research, where I helped develop JustinBot3000, an AI agent that delivers real-time course-specific hints
-                                and answers restricted to approved materials. I designed n8n workflows integrating Google Drive, Pinecone vector store, and OpenAI embeddings to enable
-                                retrieval-augmented generation (RAG), and automated Q&A through Discord commands, supporting over 100 student inquiries each week. Alongside this project,
-                                I’m currently working on Elicitation Simulation, an agent focused on interactive scenario-based learning.
+                                and answers restricted to approved materials. Helped design n8n workflows integrating Google Drive, Pinecone vector store, and OpenAI embeddings to enable
+                                RAG, and automated Q&A through Discord, supporting over student inquiries each week. Alongside this project,
+                                I’m currently working on Elicitation Simulation, where it simulates real human conversations to bring the awareness 
+                                of social and prompt engineering.
                             </p>
 
                             <div className="flex flex-wrap gap-2 mb-4">
@@ -123,7 +128,9 @@ export const Projects = () => {
 
 
                             <div className="flex justify-between items-center">
-                                <a href="https://github.com/ezixuan27/CS3500-OOD/tree/main/Calendar" className="text-xl text-[#FF7B54]/90 hover:text-[#2C4E80] transition-colors my-4">
+                                <a href="https://github.com/JoshuaGoldberg/JustinBot" 
+                                className="text-xl text-[#FF7B54]/90 hover:text-[#2C4E80] transition-colors my-4"
+                                target="_blank">
                                     View Project
                                 </a>
                             </div>
@@ -153,7 +160,9 @@ export const Projects = () => {
                             </div>
 
                             <div className="flex justify-between items-center">
-                                <a href="https://docs.google.com/presentation/d/137l1IDLxQ-HXIf7DZqgD6DPZ1YWjGK7UsX_5IXAQCRE/edit?usp=sharing" className="text-xl text-[#FF7B54]/90 hover:text-[#2C4E80] transition-colors my-4">
+                                <a href="https://docs.google.com/presentation/d/137l1IDLxQ-HXIf7DZqgD6DPZ1YWjGK7UsX_5IXAQCRE/edit?usp=sharing" 
+                                className="text-xl text-[#FF7B54]/90 hover:text-[#2C4E80] transition-colors my-4"
+                                target="_blank">
                                     View Project
                                 </a>
                             </div>
@@ -183,7 +192,9 @@ export const Projects = () => {
                             </div>
 
                             <div className="flex justify-between items-center">
-                                <a href="https://drive.google.com/file/d/1eTzdu62W11yHGcf7IJdqPsAeJP8xwc0m/view?usp=sharing" className="text-xl text-[#FF7B54]/90 hover:text-[#2C4E80] transition-colors my-4">
+                                <a href="https://drive.google.com/file/d/1eTzdu62W11yHGcf7IJdqPsAeJP8xwc0m/view?usp=sharing" 
+                                className="text-xl text-[#FF7B54]/90 hover:text-[#2C4E80] transition-colors my-4"
+                                target="_blank">
                                     View Notebook
                                 </a>
                             </div>
