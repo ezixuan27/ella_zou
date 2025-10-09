@@ -20,6 +20,9 @@ export const Projects = () => {
 
         "MyPlate" :"bg-blue-500/10 text-blue-500 hover:bg-blue-500/20",
         "Google Slides":"bg-[#FDE68A] text-[#ff5700] hover:bg-[#ffd700]",
+
+        "VEX Robotics" :"bg-[#1d346f]/70 text-white hover:bg-[#1d346f]",
+        "Engineering Design Process":"bg-[#ffd3bb]/30 text-[#fa857c] hover:bg-[#fa857c]/70 hover:text-white",
     };
 
     return (
@@ -156,7 +159,37 @@ export const Projects = () => {
                             </div>
                         </div>
 
+                        <div className="bg-white/60 p-6 rounded-xl border border-slate-200 shadow-sm
+                        hover:-translate-y-1 hover:border-blue-500/30 hober:shadow-[0?2px_8px_rgba(59, 130, 246, 0.1)] transition-all">
+                            <h3 className="text-[#1A2B4C] text-2xl font-bold mb-2 uppercase">
+                                Engineering Notebook
+                            </h3>
+                            <p className="text-[#3B4859] mb-3 text-lg">
+                                As the team captain and Engineering Notebook manager, I documented the detailed process of our robot’s design, 
+                                team management, competition strategies, and code evolution over time. Our notebook earned the Innovate Award 
+                                and Excellence Award at the Wylie High School Tournament and For The Love Of Bots Tournament. 
+                                As a team, we qualified for the 2024 VEX World Championship held in Dallas, TX. 
+                            </p>
+                            <div className="flex flex-wrap gap-2 mb-4">
+                                {["VEX Robotics", "Engineering Design Process"].map((tech, key) => (
+                                    <span
+                                        key={key}
+                                        className={`py-1 px-3 rounded-full text-sm transition shadow-sm cursor-default 
+                                 ${tagColors2[tech] || "bg-gray-100 text-gray-700 hover:bg-gray-200"}`}
+                                    >
+                                        {tech}
+                                    </span>
+                                ))}
+                            </div>
+
+                            <div className="flex justify-between items-center">
+                                <a href="https://drive.google.com/file/d/1eTzdu62W11yHGcf7IJdqPsAeJP8xwc0m/view?usp=sharing" className="text-xl text-[#FF7B54]/90 hover:text-[#2C4E80] transition-colors my-4">
+                                    View Notebook
+                                </a>
+                            </div>
                         </div>
+                    
+                    </div>
 
 
                 </RevealOnScroll>
