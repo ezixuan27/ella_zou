@@ -276,7 +276,7 @@ export const About = () => {
                                     className="bg-white " />
                                 <div className="text-box shadow-xl shadow-blue-100">
                                     <h2 className="text-black font-bold text-lg">Prestonwood Christian Academy</h2>
-                                    <small className="text-[#344c67]">2020 - 2022, Frisco/TX</small>
+                                    <small className="text-[#344c67]">2018 - 2020, Frisco/TX</small>
                                     <span className="arrow"></span>
                                 </div>
                             </div>
@@ -288,7 +288,7 @@ export const About = () => {
                                     className="bg-white " />
                                 <div className="text-box shadow-xl shadow-blue-100">
                                     <h2 className="text-black font-bold text-lg">East Beijing Road Primary School</h2>
-                                    <small className="text-[#344c67]">2014 - 2020, Nanjing/China</small>
+                                    <small className="text-[#344c67]">2012 - 2018, Nanjing/China</small>
                                     <span className="arrow"></span>
                                 </div>
                             </div>
