@@ -1,17 +1,32 @@
+import { useRef, useEffect } from 'react';
 import { RevealOnScroll } from '../RevealOnScroll';
 
-export const Home = () => {
+export const Home = ({ setPage }) => {
+    const videoRef = useRef(null);
+
+    useEffect(() => {
+        const video = videoRef.current;
+        if (!video) return;
+        video.play().catch(() => {
+            // retry once on user interaction
+            const resume = () => { video.play(); document.removeEventListener('click', resume); };
+            document.addEventListener('click', resume, { once: true });
+        });
+    }, []);
+
     return (
         <section
             id="home"
-            className="min-h-screen max-w-full flex items-center justify-center relative mx-4 py-20 overflow-hidden"
+            className="min-h-screen w-full flex items-center justify-center relative py-20 overflow-hidden"
         >
             <div className="absolute inset-0 w-full h-full z-0">
                 <video
+                    ref={videoRef}
                     autoPlay
                     loop
                     muted
                     playsInline
+                    preload="auto"
                     className="w-full h-full object-cover mix-blend-screen opacity-80 pointer-events-none"
                 >
                     <source src="Snow.mp4" type="video/mp4" />
@@ -32,17 +47,17 @@ export const Home = () => {
                     </p>
 
                     <div className="flex flex-col justify-center items-center space-y-20 py-10 md:py-20 md:flex-row md:space-x-20 md:space-y-0">
-                        <a
-                            href="#projects"
+                        <button
+                            onClick={() => setPage('projects')}
                             className="bg-[#3a537b] shadow-sm shadow-[#4E8EF7]/50 inline-flex items-center justify-center border border-[#4E8EF7] text-[#d0865e] px-6 rounded font-medium h-12
                         transition-all duration-200 hover:-translate-y-0.5 hover:bg-[#4E8EF7]/90 hover:text-white
                         hover:shadow-[0_0_15px_rgba(59,130,246,0.4)]">
                             View Projects
-                        </a>
+                        </button>
                         <div className="relative">
                             <a
                                 href="#contact"
-                                className="bg-[#d0865e] shadow-sm shadow-[#E86D2E]/50 inline-flex items-center justify-center border border-[#E86D2E] text-[#FFFFF] px-6 rounded font-medium h-12
+                                className="bg-[#d0865e] shadow-sm shadow-[#E86D2E]/50 inline-flex items-center justify-center border border-[#E86D2E] text-white px-6 rounded font-medium h-12
                             transition-all duration-200 hover:-translate-y-0.5 hover:bg-[#E86D2E]/65 hover:text-white 
                             hover:shadow-[0_0_15px_rgba(232,109,46,0.4)]">
                                 Contact Me

@@ -1,6 +1,6 @@
 import { RevealOnScroll } from "../RevealOnScroll"
 
-export const Projects = () => {
+export const Projects = ({ setPage }) => {
 
     const tagColors2 = {
         React: "bg-sky-100 text-sky-700 hover:bg-sky-200",
@@ -28,9 +28,17 @@ export const Projects = () => {
     return (
         <section
             id="projects"
-            className="bg-[#EEF5FA]min-h-screen flex items-center justify-center py-20"
+            className="bg-[#EEF5FA] min-h-screen flex items-center justify-center py-20 pt-24"
         >
             <div className="md:max-w-2/3 max-w-full md:mx-auto mx-5 my-10">
+                {setPage && (
+                    <button
+                        onClick={() => { window.scrollTo(0, 0); setPage('home'); }}
+                        className="text-[#5D88AA] hover:text-[#2C4E80] transition-colors mb-6 flex items-center gap-1 text-sm"
+                    >
+                        ← Back to Home
+                    </button>
+                )}
                 <RevealOnScroll>
                     <h2
                         className="text-4xl md:text-5xl font-bold md:mt-10 mb-8 text-[#2C4E80] text-center
@@ -40,7 +48,7 @@ export const Projects = () => {
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
 
                         <div className="bg-white/60 p-6 rounded-xl border border-slate-200 shadow-sm
-                        hover:-translate-y-1 hover:border-blue-500/30 hober:shadow-[0?2px_8px_rgba(59, 130, 246, 0.1)] transition-all">
+                        hover:-translate-y-1 hover:border-blue-500/30 hover:shadow-[0_2px_8px_rgba(59,130,246,0.1)] transition-all">
                             <h3 className="text-[rgb(26,43,76)] text-2xl font-bold mb-2 uppercase">
                                 Mudle
                             </h3>
@@ -71,7 +79,7 @@ export const Projects = () => {
                         </div>
 
                         <div className="bg-white/60 p-6 rounded-xl border border-slate-200 shadow-sm
-                        hover:-translate-y-1 hover:border-blue-500/30 hober:shadow-[0?2px_8px_rgba(59, 130, 246, 0.1)] transition-all">
+                        hover:-translate-y-1 hover:border-blue-500/30 hover:shadow-[0_2px_8px_rgba(59,130,246,0.1)] transition-all">
                             <h3 className="text-[#1A2B4C] text-2xl font-bold mb-2 uppercase">
                                 Calendar App
                             </h3>
@@ -102,7 +110,7 @@ export const Projects = () => {
                         </div>
 
                         <div className="bg-white/60 p-6 rounded-xl border border-slate-200 shadow-sm
-                        hover:-translate-y-1 hover:border-blue-500/30 hober:shadow-[0?2px_8px_rgba(59, 130, 246, 0.1)] transition-all">
+                        hover:-translate-y-1 hover:border-blue-500/30 hover:shadow-[0_2px_8px_rgba(59,130,246,0.1)] transition-all">
                             <h3 className="text-[#1A2B4C] text-2xl font-bold mb-2 uppercase">
                                 Cybersecurity AI Agents
                             </h3>
@@ -137,7 +145,7 @@ export const Projects = () => {
                         </div>
 
                     <div className="bg-white/60 p-6 rounded-xl border border-slate-200 shadow-sm
-                        hover:-translate-y-1 hover:border-blue-500/30 hober:shadow-[0?2px_8px_rgba(59, 130, 246, 0.1)] transition-all">
+                        hover:-translate-y-1 hover:border-blue-500/30 hover:shadow-[0_2px_8px_rgba(59,130,246,0.1)] transition-all">
                             <h3 className="text-[#1A2B4C] text-2xl font-bold mb-2 uppercase">
                                 Sports Nutrition - FCCLA
                             </h3>
@@ -169,7 +177,7 @@ export const Projects = () => {
                         </div>
 
                         <div className="bg-white/60 p-6 rounded-xl border border-slate-200 shadow-sm
-                        hover:-translate-y-1 hover:border-blue-500/30 hober:shadow-[0?2px_8px_rgba(59, 130, 246, 0.1)] transition-all">
+                        hover:-translate-y-1 hover:border-blue-500/30 hover:shadow-[0_2px_8px_rgba(59,130,246,0.1)] transition-all">
                             <h3 className="text-[#1A2B4C] text-2xl font-bold mb-2 uppercase">
                                 Engineering Notebook
                             </h3>

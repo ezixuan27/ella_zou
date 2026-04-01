@@ -16,12 +16,13 @@ export const LoadingScreen = ({ onComplete }) => {
 
     return (
         <div className="fixed inset-0 z-50 bg-black flex items-center justify-center">
-            <div className="h-screen"> 
-                <Lottie 
+            <div className="w-screen h-screen md:scale-100 scale-[2]">
+                <Lottie
                     lottieRef={lottieRef}
                     animationData={eyeAnimation}
-                    loop={false} 
+                    loop={false}
                     autoplay={true}
+                    style={{ width: "100%", height: "100%" }}
                     onComplete={() => {
                         onComplete();
                     }}
