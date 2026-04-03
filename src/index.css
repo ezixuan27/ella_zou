@@ -270,3 +270,114 @@ body {
   opacity: 1;
   transform: translateX(0);
 }
+
+/* ── Polaroid scatter pile ── */
+.polaroid-pile {
+  position: relative;
+  width: 260px;
+  height: 280px;
+  cursor: pointer;
+}
+
+.polaroid-card {
+  position: absolute;
+  top: 0; left: 0;
+  width: 240px;
+  background: white;
+  padding: 12px 12px 42px 12px;
+  box-shadow: 3px 4px 18px rgba(0,0,0,0.14);
+  transform: rotate(var(--rot)) translate(var(--tx), var(--ty));
+  transition: transform 0.45s cubic-bezier(0.34, 1.56, 0.64, 1),
+              box-shadow 0.3s ease;
+  will-change: transform;
+}
+
+.polaroid-card img {
+  width: 216px;
+  height: 216px;
+  object-fit: cover;
+  display: block;
+}
+
+.polaroid-card span {
+  position: absolute;
+  bottom: 10px;
+  left: 0; right: 0;
+  text-align: center;
+  font-size: 12px;
+  color: #aaa;
+  font-style: italic;
+}
+
+/* scattered positions on pile hover — wider fan */
+.polaroid-pile:hover .polaroid-card:nth-child(1) {
+  transform: rotate(-16deg) translate(-320px, -20px);
+  box-shadow: 6px 8px 24px rgba(0,0,0,0.17);
+}
+.polaroid-pile:hover .polaroid-card:nth-child(2) {
+  transform: rotate(-6deg) translate(-230px, -230px);
+  box-shadow: 6px 8px 24px rgba(0,0,0,0.17);
+}
+.polaroid-pile:hover .polaroid-card:nth-child(3) {
+  transform: rotate(3deg) translate(-60px, -280px);
+  box-shadow: 6px 8px 24px rgba(0,0,0,0.17);
+}
+.polaroid-pile:hover .polaroid-card:nth-child(4) {
+  transform: rotate(10deg) translate(120px, -265px);
+  box-shadow: 6px 8px 24px rgba(0,0,0,0.17);
+}
+.polaroid-pile:hover .polaroid-card:nth-child(5) {
+  transform: rotate(17deg) translate(280px, -170px);
+  box-shadow: 6px 8px 24px rgba(0,0,0,0.17);
+}
+.polaroid-pile:hover .polaroid-card:nth-child(6) {
+  transform: rotate(22deg) translate(330px, 40px);
+  box-shadow: 6px 8px 24px rgba(0,0,0,0.17);
+}
+.polaroid-pile:hover .polaroid-card:nth-child(7) {
+  transform: rotate(-11deg) translate(-280px, 150px);
+  box-shadow: 6px 8px 24px rgba(0,0,0,0.17);
+}
+
+/* ── Mobile swipe carousel ── */
+.polaroid-carousel {
+  display: flex;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  gap: 1.25rem;
+  padding: 1rem 2rem 1.5rem;
+  scrollbar-width: none;
+}
+.polaroid-carousel::-webkit-scrollbar { display: none; }
+
+.polaroid-carousel-card {
+  flex-shrink: 0;
+  scroll-snap-align: center;
+  width: 220px;
+  background: white;
+  padding: 10px 10px 36px 10px;
+  box-shadow: 3px 4px 16px rgba(0,0,0,0.14);
+  border-radius: 2px;
+}
+.polaroid-carousel-card img {
+  width: 200px;
+  height: 200px;
+  object-fit: cover;
+  display: block;
+}
+.polaroid-carousel-card span {
+  display: block;
+  text-align: center;
+  font-size: 12px;
+  color: #aaa;
+  font-style: italic;
+  margin-top: 8px;
+}
+
+/* individual card hover — lift forward */
+.polaroid-card:hover {
+  z-index: 10 !important;
+  box-shadow: 8px 12px 32px rgba(0,0,0,0.22) !important;
+  filter: brightness(1.03);
+}

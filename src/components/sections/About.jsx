@@ -120,13 +120,34 @@ export const About = () => {
     return (
         <section
             id="about"
-            className="bg-white min-h-screen flex flex-col py-20"
+            className="bg-white min-h-screen flex flex-col py-20 relative"
             style={{
                 clipPath: 'polygon(0 80px, 100% 0, 100% 100%, 0 100%)',
                 paddingTop: '7rem',
                 marginTop: '-3rem',
             }}
         >
+            {/* Scattered AI images — left side */}
+            <div className="hidden xl:block pointer-events-none select-none">
+                <img src="ai-portrait.png" alt=""
+                    className="absolute w-44 opacity-90"
+                    style={{ left: '2rem', top: '10rem', rotate: '-6deg',
+                        boxShadow: '4px 6px 20px rgba(0,0,0,0.13)',
+                        borderRadius: '4px', border: '6px solid white' }} />
+                <img src="ai-eye.png" alt=""
+                    className="absolute w-36 opacity-85"
+                    style={{ left: '3.5rem', top: '26rem', rotate: '4deg',
+                        boxShadow: '4px 6px 20px rgba(0,0,0,0.11)',
+                        borderRadius: '4px', border: '6px solid white' }} />
+            </div>
+            {/* Scattered AI images — right side */}
+            <div className="hidden xl:block pointer-events-none select-none">
+                <img src="ai-snowboard.png" alt=""
+                    className="absolute w-40 opacity-90"
+                    style={{ right: '2rem', top: '14rem', rotate: '7deg',
+                        boxShadow: '4px 6px 20px rgba(0,0,0,0.13)',
+                        borderRadius: '4px', border: '6px solid white' }} />
+            </div>
 
             <div className="4xl:max-w-1/2 md:max-w-2/3 md:mx-auto w-full px-4 my-10">
                 <RevealOnScroll>
@@ -165,62 +186,43 @@ export const About = () => {
                     </div>
                 </RevealOnScroll>
 
-                <div className="flex flex-col space-y-4 md:hidden w-full max-w-[400] my-5 gap-8">
-                    <div className="relative w-full h-[300px] rounded-xl overflow-hidden">
-                        <img
-                            src="mypic.jpeg"
-                            alt="Me"
-                            className="absolute inset-0 w-full h-full object-cover rounded-xl transition-opacity duration-500 opacity-100 hover:opacity-0"
-                        />
-                        <img
-                            src="friends.jpeg"
-                            alt="Me and Friends"
-                            className="absolute inset-0 w-full h-full object-cover rounded-xl transition-opacity duration-500 opacity-0 hover:opacity-100"
-                        />
-                    </div>
+                {/* Photos */}
+                {(() => {
+                    const photos = [
+                        { src: 'mypic.jpeg',         label: 'me :)',           rot: '-8deg',  tx: '-4px',  ty: '2px'  },
+                        { src: 'friends.jpeg',       label: 'friends ♡',       rot: '5deg',   tx: '3px',   ty: '-4px' },
+                        { src: 'candypic.jpg',       label: 'candy 🐱',        rot: '-3deg',  tx: '6px',   ty: '6px'  },
+                        { src: 'candysleep.JPG',     label: 'candy sleeping',  rot: '10deg',  tx: '-2px',  ty: '3px'  },
+                        { src: 'photo-selfie.jpeg',  label: 'just a selfie',   rot: '-6deg',  tx: '4px',   ty: '-2px', pos: 'top' },
+                        { src: 'photo-climb.png',    label: 'ice climbing 🧊',  rot: '-4deg',  tx: '2px',   ty: '-6px' },
+                    ];
+                    return (<>
+                        {/* Desktop: polaroid scatter pile */}
+                        <div className="hidden md:flex justify-center my-16">
+                            <div className="polaroid-pile">
+                                {photos.map((p, i) => (
+                                    <div key={i} className="polaroid-card" style={{ '--rot': p.rot, '--tx': p.tx, '--ty': p.ty, zIndex: 7 - i }}>
+                                        <img src={p.src} alt={p.label} style={{ objectPosition: p.pos || 'center' }} />
+                                        <span>{p.label}</span>
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
 
-                    <div className="relative w-full h-[300px] rounded-xl overflow-hidden">
-                        <img
-                            src="candypic.jpg"
-                            alt="Candy"
-                            className="absolute inset-0 w-full h-full object-cover rounded-xl transition-opacity duration-500 opacity-100 hover:opacity-0"
-                        />
-                        <img
-                            src="candysleep.JPG"
-                            alt="Candy Sleep"
-                            className="absolute inset-0 w-full h-full object-cover rounded-xl transition-opacity duration-500 opacity-0 hover:opacity-100"
-                        />
-                    </div>
-                </div>
-
-                <div className="hidden md:flex flex-1 mx-auto flex-row md:space-x-4 items-center justify-center my-10">
-
-                    <div className="flex flex-1 relative w-2/5 h-150 rounded-xl overflow-hidden">
-                        <img
-                            src="mypic.jpeg"
-                            alt="Me"
-                            className="absolute inset-0 w-full h-full md:h-150 md:aspect-square object-cover rounded-xl transition-opacity duration-500 opacity-100 hover:opacity-0"
-                        />
-                        <img
-                            src="friends.jpeg"
-                            alt="Me and Friends"
-                            className="absolute inset-0 w-full h-full md:h-150 md:aspect-square object-cover rounded-xl transition-opacity duration-500 opacity-0 hover:opacity-100"
-                        />
-                    </div>
-
-                    <div className="flex flex-1 relative w-2/5 h-150 rounded-xl overflow-hidden">
-                        <img
-                            src="candypic.jpg"
-                            alt="Candy"
-                            className="absolute inset-0 w-full h-full md:h-150 md:aspect-square object-cover rounded-xl transition-opacity duration-500 opacity-100 hover:opacity-0"
-                        />
-                        <img
-                            src="candysleep.JPG"
-                            alt="Candy Sleep"
-                            className="absolute inset-0 w-full h-full object-cover md:h-150 md:aspect-square rounded-xl transition-opacity duration-500 opacity-0 hover:opacity-100"
-                        />
-                    </div>
-                </div>
+                        {/* Mobile: swipe carousel */}
+                        <div className="md:hidden my-10">
+                            <div className="polaroid-carousel">
+                                {photos.map((p, i) => (
+                                    <div key={i} className="polaroid-carousel-card">
+                                        <img src={p.src} alt={p.label} style={{ objectPosition: p.pos || 'center' }} />
+                                        <span>{p.label}</span>
+                                    </div>
+                                ))}
+                            </div>
+                            <p className="text-center text-[#8BB1D1] text-xs mt-4 tracking-widest">swipe ›</p>
+                        </div>
+                    </>);
+                })()}
 
                 <h2 className="text-3xl font-bold mt-10 text-[#5D88AA] text-center
                     after:block after:w-25 after:h-[3px]

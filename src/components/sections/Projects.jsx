@@ -34,9 +34,11 @@ export const Projects = ({ setPage }) => {
                 {setPage && (
                     <button
                         onClick={() => { window.scrollTo(0, 0); setPage('home'); }}
-                        className="text-[#8BB1D1] hover:text-white transition-colors mb-6 flex items-center gap-1 text-sm"
+                        className="text-[#8BB1D1] hover:text-white transition-colors mb-6 flex items-center gap-1 text-sm group"
                     >
-                        ← Back to Home
+                        <span className="relative after:absolute after:bottom-0 after:left-1/2 after:-translate-x-1/2 after:h-[1px] after:w-0 after:bg-current after:transition-all after:duration-300 group-hover:after:w-4/5">
+                            ← Back to Home
+                        </span>
                     </button>
                 )}
                 <RevealOnScroll>
@@ -47,7 +49,7 @@ export const Projects = ({ setPage }) => {
                     </h2>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
 
-                        <div className="bg-white/60 p-6 rounded-xl border border-slate-200 shadow-sm
+                        <div className="bg-white/90 p-6 rounded-xl border border-slate-200 shadow-sm
                         hover:-translate-y-1 hover:border-blue-500/30 hover:shadow-[0_2px_8px_rgba(59,130,246,0.1)] transition-all">
                             <h3 className="text-[rgb(26,43,76)] text-2xl font-bold mb-2 uppercase">
                                 Mudle
@@ -78,7 +80,7 @@ export const Projects = ({ setPage }) => {
                             </div>
                         </div>
 
-                        <div className="bg-white/60 p-6 rounded-xl border border-slate-200 shadow-sm
+                        <div className="bg-white/90 p-6 rounded-xl border border-slate-200 shadow-sm
                         hover:-translate-y-1 hover:border-blue-500/30 hover:shadow-[0_2px_8px_rgba(59,130,246,0.1)] transition-all">
                             <h3 className="text-[#1A2B4C] text-2xl font-bold mb-2 uppercase">
                                 Calendar App
@@ -109,7 +111,7 @@ export const Projects = ({ setPage }) => {
                             </div>
                         </div>
 
-                        <div className="bg-white/60 p-6 rounded-xl border border-slate-200 shadow-sm
+                        <div className="bg-white/90 p-6 rounded-xl border border-slate-200 shadow-sm
                         hover:-translate-y-1 hover:border-blue-500/30 hover:shadow-[0_2px_8px_rgba(59,130,246,0.1)] transition-all">
                             <h3 className="text-[#1A2B4C] text-2xl font-bold mb-2 uppercase">
                                 Cybersecurity AI Agents
@@ -144,7 +146,7 @@ export const Projects = ({ setPage }) => {
                             </div>
                         </div>
 
-                    <div className="bg-white/60 p-6 rounded-xl border border-slate-200 shadow-sm
+                    <div className="bg-white/90 p-6 rounded-xl border border-slate-200 shadow-sm
                         hover:-translate-y-1 hover:border-blue-500/30 hover:shadow-[0_2px_8px_rgba(59,130,246,0.1)] transition-all">
                             <h3 className="text-[#1A2B4C] text-2xl font-bold mb-2 uppercase">
                                 Sports Nutrition - FCCLA
@@ -176,7 +178,7 @@ export const Projects = ({ setPage }) => {
                             </div>
                         </div>
 
-                        <div className="bg-white/60 p-6 rounded-xl border border-slate-200 shadow-sm
+                        <div className="bg-white/90 p-6 rounded-xl border border-slate-200 shadow-sm
                         hover:-translate-y-1 hover:border-blue-500/30 hover:shadow-[0_2px_8px_rgba(59,130,246,0.1)] transition-all">
                             <h3 className="text-[#1A2B4C] text-2xl font-bold mb-2 uppercase">
                                 Engineering Notebook
