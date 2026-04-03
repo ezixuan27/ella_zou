@@ -192,9 +192,9 @@ export const About = () => {
                         { src: 'mypic.jpeg',         label: 'me :)',           rot: '-8deg',  tx: '-4px',  ty: '2px'  },
                         { src: 'friends.jpeg',       label: 'friends ♡',       rot: '5deg',   tx: '3px',   ty: '-4px' },
                         { src: 'candypic.jpg',       label: 'Candy',        rot: '-3deg',  tx: '6px',   ty: '6px'  },
-                        { src: 'candysleep.JPG',     label: 'candy sleeping',  rot: '10deg',  tx: '-2px',  ty: '3px'  },
-                        { src: 'photo-selfie.jpeg',  label: 'just a selfie',   rot: '-6deg',  tx: '4px',   ty: '-2px', pos: 'top' },
-                        { src: 'photo-climb.png',    label: 'ice climbing 🧊',  rot: '-4deg',  tx: '2px',   ty: '-6px' },
+                        { src: 'candysleep.JPG',     label: 'Candy sleeping',  rot: '10deg',  tx: '-2px',  ty: '3px'  },
+                        { src: 'photo-selfie.jpeg',  label: 'another me',   rot: '-6deg',  tx: '4px',   ty: '-2px', pos: 'top' },
+                        { src: 'photo-climb.png',    label: 'ice climbing',  rot: '-4deg',  tx: '2px',   ty: '-6px' },
                     ];
                     return (<>
                         {/* Desktop: polaroid scatter pile */}
