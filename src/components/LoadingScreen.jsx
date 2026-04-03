@@ -15,13 +15,14 @@ export const LoadingScreen = ({ onComplete }) => {
     }, []);
 
     return (
-        <div className="fixed inset-0 z-50 bg-black flex items-center justify-center">
-            <div className="w-screen h-screen md:scale-100 scale-[2]">
+        <div className="fixed inset-0 z-50 bg-black flex items-center justify-center overflow-hidden">
+            <div className="w-full h-full md:w-[200%] md:h-[200%]">
                 <Lottie
                     lottieRef={lottieRef}
                     animationData={eyeAnimation}
                     loop={false}
                     autoplay={true}
+                    rendererSettings={{ preserveAspectRatio: 'xMidYMid slice' }}
                     style={{ width: "100%", height: "100%" }}
                     onComplete={() => {
                         onComplete();
