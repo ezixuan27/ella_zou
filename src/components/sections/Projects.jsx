@@ -41,7 +41,7 @@ export const Projects = ({ setPage }) => {
                 )}
                 <RevealOnScroll>
                     <h2
-                        className="text-4xl md:text-5xl font-bold md:mt-10 mb-8 text-[#2C4E80] text-center
+                        className="text-4xl md:text-5xl font-bold md:mt-10 mb-8 text-[#2C4E80] text-center tracking-[0.12em]
                         after:block after:w-80 after:h-[3px] after:bg-[#2C4E80] after:mx-auto after:mt-5">
                         FEATURED PROJECTS
                     </h2>

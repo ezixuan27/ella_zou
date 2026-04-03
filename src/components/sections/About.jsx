@@ -127,7 +127,7 @@ export const About = () => {
                 <RevealOnScroll>
                     <div className="bg-[#F7FAFF] rounded-3xl shadow-md border border-[#E3EEF7] p-7 md:p-10">
 
-                        <h2 className="text-4xl md:text-5xl font-bold mb-8 text-[#5D88AA] text-center
+                        <h2 className="text-4xl md:text-5xl font-bold mb-8 text-[#5D88AA] text-center tracking-[0.12em]
                             after:content-[''] after:block after:w-40 after:h-[3px]
                             after:bg-[#5D88AA] after:mx-auto after:mt-3">
                             ABOUT ME

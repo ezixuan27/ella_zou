@@ -67,7 +67,7 @@ export const Experience = ({ setPage }) => {
                 </button>
 
                 <RevealOnScroll>
-                    <h2 className="text-4xl md:text-5xl font-bold mb-16 text-[#2C4E80] text-center
+                    <h2 className="text-4xl md:text-5xl font-bold mb-16 text-[#2C4E80] text-center tracking-[0.12em]
                         after:content-[''] after:block after:w-40 after:h-[3px]
                         after:bg-[#5D88AA] after:mx-auto after:mt-3">
                         EXPERIENCE
