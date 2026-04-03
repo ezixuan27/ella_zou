@@ -122,7 +122,7 @@ export const About = () => {
             id="about"
             className="bg-white min-h-screen flex flex-col py-20"
             style={{
-                clipPath: 'polygon(0 5%, 100% 0, 100% 100%, 0 100%)',
+                clipPath: 'polygon(0 80px, 100% 0, 100% 100%, 0 100%)',
                 paddingTop: '7rem',
                 marginTop: '-3rem',
             }}
