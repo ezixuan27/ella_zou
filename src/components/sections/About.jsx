@@ -191,7 +191,7 @@ export const About = () => {
                     const photos = [
                         { src: 'mypic.jpeg',         label: 'me :)',           rot: '-8deg',  tx: '-4px',  ty: '2px'  },
                         { src: 'friends.jpeg',       label: 'friends ♡',       rot: '5deg',   tx: '3px',   ty: '-4px' },
-                        { src: 'candypic.jpg',       label: 'candy 🐱',        rot: '-3deg',  tx: '6px',   ty: '6px'  },
+                        { src: 'candypic.jpg',       label: 'Candy',        rot: '-3deg',  tx: '6px',   ty: '6px'  },
                         { src: 'candysleep.JPG',     label: 'candy sleeping',  rot: '10deg',  tx: '-2px',  ty: '3px'  },
                         { src: 'photo-selfie.jpeg',  label: 'just a selfie',   rot: '-6deg',  tx: '4px',   ty: '-2px', pos: 'top' },
                         { src: 'photo-climb.png',    label: 'ice climbing 🧊',  rot: '-4deg',  tx: '2px',   ty: '-6px' },
@@ -202,7 +202,9 @@ export const About = () => {
                             <div className="polaroid-pile">
                                 {photos.map((p, i) => (
                                     <div key={i} className="polaroid-card" style={{ '--rot': p.rot, '--tx': p.tx, '--ty': p.ty, zIndex: 7 - i }}>
-                                        <img src={p.src} alt={p.label} style={{ objectPosition: p.pos || 'center' }} />
+                                        <img src={p.src} alt={p.label} style={{ objectPosition: p.pos || 'center' }}
+                                            draggable={false}
+                                            onContextMenu={(e) => e.preventDefault()} />
                                         <span>{p.label}</span>
                                     </div>
                                 ))}
@@ -214,7 +216,9 @@ export const About = () => {
                             <div className="polaroid-carousel">
                                 {photos.map((p, i) => (
                                     <div key={i} className="polaroid-carousel-card">
-                                        <img src={p.src} alt={p.label} style={{ objectPosition: p.pos || 'center' }} />
+                                        <img src={p.src} alt={p.label} style={{ objectPosition: p.pos || 'center' }}
+                                            draggable={false}
+                                            onContextMenu={(e) => e.preventDefault()} />
                                         <span>{p.label}</span>
                                     </div>
                                 ))}
