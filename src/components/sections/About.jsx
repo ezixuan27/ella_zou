@@ -121,6 +121,11 @@ export const About = () => {
         <section
             id="about"
             className="bg-white min-h-screen flex flex-col py-20"
+            style={{
+                clipPath: 'polygon(0 5%, 100% 0, 100% 100%, 0 100%)',
+                paddingTop: '7rem',
+                marginTop: '-3rem',
+            }}
         >
 
             <div className="4xl:max-w-1/2 md:max-w-2/3 md:mx-auto w-full px-4 my-10">
