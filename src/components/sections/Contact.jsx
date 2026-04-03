@@ -25,18 +25,18 @@ export const Contact = () => {
     return (
         <section
             id="contact"
-            className="bg-[#F7FAFF] min-h-screen flex items-center justify-center py-20"
+            className="bg-[#0d1b2e] min-h-screen flex items-center justify-center py-20"
         >
             <div className="w-full max-w-2xl px-4">
             <RevealOnScroll>
                 <div>
 
-                    <h2 className="text-4xl md:text-5xl font-bold mb-3 text-[#5D88AA] text-center
+                    <h2 className="text-4xl md:text-5xl font-bold mb-3 text-[#8BB1D1] text-center
                         after:content-[''] after:block after:w-32 after:h-[3px]
                         after:bg-[#5D88AA] after:mx-auto after:mt-3">
                         Get In Touch
                     </h2>
-                    <p className="text-center text-[#344c67] mb-10 mt-6">
+                    <p className="text-center text-[#8BB1D1]/70 mb-10 mt-6">
                         Have a question or want to connect? Feel free to reach out!
                     </p>
 
@@ -95,18 +95,18 @@ export const Contact = () => {
                         <a href="https://github.com/ezixuan27"
                             target="_blank" rel="noopener noreferrer"
                             aria-label="GitHub"
-                            className="opacity-70 transition hover:opacity-100 hover:-translate-y-0.5">
+                            className="opacity-80 transition hover:opacity-100 hover:-translate-y-0.5">
                             <img src="github.svg" className="h-9 w-9" />
                         </a>
                         <a href="https://www.linkedin.com/in/zixuan-zou"
                             target="_blank" rel="noopener noreferrer"
                             aria-label="LinkedIn"
-                            className="opacity-70 transition hover:opacity-100 hover:-translate-y-0.5">
+                            className="opacity-80 transition hover:opacity-100 hover:-translate-y-0.5">
                             <img src="linkedin.svg" className="h-9 w-9" />
                         </a>
                         <a href="mailto:zou.zix@northeastern.edu"
                             aria-label="Email"
-                            className="opacity-70 transition hover:opacity-100 hover:-translate-y-0.5">
+                            className="opacity-80 transition hover:opacity-100 hover:-translate-y-0.5">
                             <img src="email.png" className="h-9 w-9" />
                         </a>
                     </div>
