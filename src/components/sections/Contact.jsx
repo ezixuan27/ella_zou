@@ -96,7 +96,7 @@ export const Contact = () => {
                             target="_blank" rel="noopener noreferrer"
                             aria-label="GitHub"
                             className="opacity-80 transition hover:opacity-100 hover:-translate-y-0.5">
-                            <img src="github.svg" className="h-9 w-9" />
+                            <img src="github.svg" className="h-9 w-9 invert" />
                         </a>
                         <a href="https://www.linkedin.com/in/zixuan-zou"
                             target="_blank" rel="noopener noreferrer"

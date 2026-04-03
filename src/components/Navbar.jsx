@@ -23,8 +23,10 @@ after:h-[2px] after:w-0 hover:after:w-full after:transition-all after:duration-3
         <nav className="fixed top-0 w-full z-40 bg-[#3e5873]/70 backdrop-blur-md border-white/10 shadow-lg">
             <div className="max-w-7xl mx-auto px-4">
                 <div className="flex justify-between items-center h-16">
-                    <button onClick={goHome} className="text-xl font-bold text-white bg-transparent border-none cursor-pointer">
-                        ZZ
+                    <button onClick={goHome} className="text-xl font-bold text-white bg-transparent border-none cursor-pointer group relative">
+                        <span className="relative after:absolute after:bottom-0 after:left-1/2 after:-translate-x-1/2 after:h-[2px] after:w-0 after:bg-white after:transition-all after:duration-300 group-hover:after:w-full">
+                            ZZ
+                        </span>
                     </button>
                     <div
                         className="w-7 h-5 relative cursor-pointer z-40 md:hidden"
