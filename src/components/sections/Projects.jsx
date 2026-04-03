@@ -2,7 +2,7 @@ import { RevealOnScroll } from "../RevealOnScroll"
 
 export const Projects = ({ setPage }) => {
 
-    const tagColors2 = {
+    const tagColors = {
         React: "bg-sky-100 text-sky-700 hover:bg-sky-200",
         JSX: "bg-sky-100 text-sky-700 hover:bg-sky-200",
         CSS: "bg-sky-100 text-sky-700 hover:bg-sky-200",
@@ -47,6 +47,7 @@ export const Projects = ({ setPage }) => {
                         after:block after:w-80 after:h-[3px] after:bg-[#5D88AA] after:mx-auto after:mt-5">
                         FEATURED PROJECTS
                     </h2>
+                </RevealOnScroll>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
 
                         <div className="bg-white/90 p-6 rounded-xl border border-slate-200 shadow-sm
@@ -64,7 +65,7 @@ export const Projects = ({ setPage }) => {
                                     <span
                                         key={key}
                                         className={`py-1 px-3 rounded-full text-sm transition shadow-sm cursor-default 
-                                 ${tagColors2[tech] || "bg-gray-100 text-gray-700 hover:bg-gray-200"}`}
+                                 ${tagColors[tech] || "bg-gray-100 text-gray-700 hover:bg-gray-200"}`}
                                     >
                                         {tech}
                                     </span>
@@ -95,7 +96,7 @@ export const Projects = ({ setPage }) => {
                                     <span
                                         key={key}
                                         className={`py-1 px-3 rounded-full text-sm transition shadow-sm cursor-default 
-                                 ${tagColors2[tech] || "bg-gray-100 text-gray-700 hover:bg-gray-200"}`}
+                                 ${tagColors[tech] || "bg-gray-100 text-gray-700 hover:bg-gray-200"}`}
                                     >
                                         {tech}
                                     </span>
@@ -129,7 +130,7 @@ export const Projects = ({ setPage }) => {
                                     <span
                                         key={key}
                                         className={`py-1 px-3 rounded-full text-sm transition shadow-sm cursor-default 
-                                 ${tagColors2[tech] || "bg-gray-100 text-gray-700 hover:bg-gray-200"}`}
+                                 ${tagColors[tech] || "bg-gray-100 text-gray-700 hover:bg-gray-200"}`}
                                     >
                                         {tech}
                                     </span>
@@ -162,7 +163,7 @@ export const Projects = ({ setPage }) => {
                                     <span
                                         key={key}
                                         className={`py-1 px-3 rounded-full text-sm transition shadow-sm cursor-default 
-                                 ${tagColors2[tech] || "bg-gray-100 text-gray-700 hover:bg-gray-200"}`}
+                                 ${tagColors[tech] || "bg-gray-100 text-gray-700 hover:bg-gray-200"}`}
                                     >
                                         {tech}
                                     </span>
@@ -194,7 +195,7 @@ export const Projects = ({ setPage }) => {
                                     <span
                                         key={key}
                                         className={`py-1 px-3 rounded-full text-sm transition shadow-sm cursor-default 
-                                 ${tagColors2[tech] || "bg-gray-100 text-gray-700 hover:bg-gray-200"}`}
+                                 ${tagColors[tech] || "bg-gray-100 text-gray-700 hover:bg-gray-200"}`}
                                     >
                                         {tech}
                                     </span>
@@ -211,9 +212,6 @@ export const Projects = ({ setPage }) => {
                         </div>
                     
                     </div>
-
-
-                </RevealOnScroll>
             </div>
 
         </section>

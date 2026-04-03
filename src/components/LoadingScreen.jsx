@@ -7,11 +7,15 @@ export const LoadingScreen = ({ onComplete }) => {
 
     useEffect(() => {
         document.body.classList.add("overflow-hidden");
+        document.documentElement.classList.add("overflow-hidden");
         if (lottieRef.current) {
-            lottieRef.current.setSpeed(0.8); 
+            lottieRef.current.setSpeed(0.8);
         }
 
-        return () => document.body.classList.remove("overflow-hidden");
+        return () => {
+            document.body.classList.remove("overflow-hidden");
+            document.documentElement.classList.remove("overflow-hidden");
+        };
     }, []);
 
     return (
