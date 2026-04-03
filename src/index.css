@@ -1,5 +1,20 @@
 @import "tailwindcss";
 
+:root {
+  --color-navy-deep:   #0d1b2e;
+  --color-navy-dark:   #2C4E80;
+  --color-navy-mid:    #3a537b;
+  --color-navy-muted:  #3e577b;
+  --color-steel:       #5D88AA;
+  --color-steel-light: #8BB1D1;
+  --color-orange:      #d1865e;
+  --color-orange-dark: #E86D2E;
+  --color-hero-name:   #395279;
+  --color-text-body:   #344c67;
+  --color-bg-light:    #F7FAFF;
+  --color-bg-subtle:   #EEF5FA;
+}
+
 html,
 body {
   margin: 0;
