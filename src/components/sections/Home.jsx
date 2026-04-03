@@ -35,9 +35,16 @@ export const Home = ({ setPage }) => {
 
             <RevealOnScroll>
                 <div className="text-center max-w-full md:mx-auto z-10 px-4 mt-15 md:mt-45 relative">
-                    <h1 className="font-['Josefin_Sans',_sans-serif] font-bold tracking-tight leading-tight text-4xl md:text-7xl">
-                        <span className="text-[#395279]">Hi, I’m</span>
-                        <span className="text-[#d1865e] ml-4">Zixuan Zou.</span>
+                    <h1 className="leading-none">
+                        <span className="block font-[‘Josefin_Sans’,_sans-serif] text-sm md:text-base italic tracking-[0.2em] text-[#395279] opacity-70 mb-3">
+                            hi, i’m
+                        </span>
+                        <span
+                            className="block font-[‘Playfair_Display’,_serif] font-black text-[#d1865e]"
+                            style={{ fontSize: ‘clamp(64px, 8vw, 118px)’ }}
+                        >
+                            Zixuan Zou.
+                        </span>
                     </h1>
 
                     <p className="text-[#3e577b] text-xl md:text-2xl mt-8 md:mb-8 max-w-4xl mx-auto">
