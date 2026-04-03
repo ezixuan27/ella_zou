@@ -28,21 +28,21 @@ export const Projects = ({ setPage }) => {
     return (
         <section
             id="projects"
-            className="bg-[#EEF5FA] min-h-screen flex items-center justify-center py-20 pt-24"
+            className="bg-[#0d1b2e] min-h-screen flex items-center justify-center py-20 pt-24"
         >
             <div className="md:max-w-2/3 max-w-full md:mx-auto mx-5 my-10">
                 {setPage && (
                     <button
                         onClick={() => { window.scrollTo(0, 0); setPage('home'); }}
-                        className="text-[#5D88AA] hover:text-[#2C4E80] transition-colors mb-6 flex items-center gap-1 text-sm"
+                        className="text-[#8BB1D1] hover:text-white transition-colors mb-6 flex items-center gap-1 text-sm"
                     >
                         ← Back to Home
                     </button>
                 )}
                 <RevealOnScroll>
                     <h2
-                        className="text-4xl md:text-5xl font-bold md:mt-10 mb-8 text-[#2C4E80] text-center tracking-[0.12em]
-                        after:block after:w-80 after:h-[3px] after:bg-[#2C4E80] after:mx-auto after:mt-5">
+                        className="text-4xl md:text-5xl font-bold md:mt-10 mb-8 text-[#8BB1D1] text-center tracking-[0.12em]
+                        after:block after:w-80 after:h-[3px] after:bg-[#5D88AA] after:mx-auto after:mt-5">
                         FEATURED PROJECTS
                     </h2>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
