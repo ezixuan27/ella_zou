@@ -147,6 +147,11 @@ export const About = () => {
                     style={{ right: '2rem', top: '14rem', rotate: '7deg',
                         boxShadow: '4px 6px 20px rgba(0,0,0,0.13)',
                         borderRadius: '4px', border: '6px solid white' }} />
+                <img src="photo-climb2.JPG" alt=""
+                    className="absolute w-36 opacity-90"
+                    style={{ right: '3rem', top: '30rem', rotate: '-5deg',
+                        boxShadow: '4px 6px 20px rgba(0,0,0,0.13)',
+                        borderRadius: '4px', border: '6px solid white' }} />
             </div>
 
             <div className="4xl:max-w-1/2 md:max-w-2/3 md:mx-auto w-full px-4 my-10">
@@ -244,9 +249,9 @@ export const About = () => {
                             dates="2024 – Present" location="Boston, MA"
                             subtitle="B.S. Computer Science · Supply Chain Management Minor"
                             accentColor="#5D88AA"
-                            coursework={["Algorithms and Data","Object Oriented Design","Global Supply Chain Strategy","Foundations of Data Science","Advanced Linear Algebra","Advanced Mathematical Reasoning","Discrete Structures","Fundamentals of CS I/II","Introduction to Cybersecurity","Supply Chain & Operation Management"]}
+                            coursework={["Algorithms and Data","Object Oriented Design","Global Supply Chain Strategy","Foundations of Data Science","Advanced Linear Algebra","Advanced Mathematical Reasoning","Discrete Structures","Fundamentals of CS I/II","Introduction to Cybersecurity","Supply Chain & Operation Management","Introduction to Database Design"]}
                             activities={[
-                                { name: "Kaleidoscope (Khoury's Club Council)", role: "Event Coordinator", date: "2025 – Present" },
+                                { name: "Kaleidoscope (Khoury's Club Council)", role: "Events & Operations", date: "2025 – Present" },
                                 { name: "NU Supply Chain Management Club", date: "2025 – Present" },
                                 { name: "OASIS", role: "Web Developer", date: "Jan – Mar 2025" },
                             ]}
