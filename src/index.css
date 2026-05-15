@@ -1,27 +1,36 @@
 @import "tailwindcss";
 
+/* ─────────────────────────────────────────────────────────────
+ * Editorial Luxe — design tokens (Tailwind v4 @theme)
+ * Palette: deep navy + lava orange + paper.
+ * Type: Fraunces (display) / Inter (body) / JetBrains Mono (meta)
+ * ───────────────────────────────────────────────────────────── */
+@theme {
+  --color-abyss:    #0A1A2F;
+  --color-lava:     #FF5A1F;
+  --color-paper:    #F4EDE2;
+  --color-cream:    #E8DDD0;
+  --color-ink:      #0A0A0A;
+  --color-mute:     #4A6B8C;
+  --color-hairline: rgba(255, 90, 31, 0.4);
+
+  --font-display: 'Fraunces', Georgia, serif;
+  --font-sans:    'Inter', system-ui, sans-serif;
+  --font-mono:    'JetBrains Mono', ui-monospace, monospace;
+}
+
 :root {
-  --color-navy-deep:   #0d1b2e;
-  --color-navy-dark:   #2C4E80;
-  --color-navy-mid:    #3a537b;
-  --color-navy-muted:  #3e577b;
-  --color-steel:       #5D88AA;
-  --color-steel-light: #8BB1D1;
-  --color-orange:      #d1865e;
-  --color-orange-dark: #E86D2E;
-  --color-hero-name:   #395279;
-  --color-text-body:   #344c67;
-  --color-bg-light:    #F7FAFF;
-  --color-bg-subtle:   #EEF5FA;
+  --color-hairline: rgba(255, 90, 31, 0.4);
 }
 
 html,
 body {
   margin: 0;
   padding: 0;
-  font-family: 'Josefin Sans', sans-serif;
-  background-color: #000000;
-  color: #f3f4f6;
+  font-family: var(--font-sans);
+  background-color: var(--color-abyss);
+  color: var(--color-paper);
+  -webkit-font-smoothing: antialiased;
   overscroll-behavior: none;
 }
 
@@ -30,30 +39,117 @@ img {
   -webkit-user-drag: none;
 }
 
-
+/* ── RevealOnScroll (unchanged behavior) ── */
 .reveal {
   opacity: 0;
   transform: translateY(30px);
   transition: opacity 0.8s ease, transform 0.8s ease;
 }
-
 .reveal.visible {
   opacity: 1;
   transform: translateY(0);
 }
-
 .reveal-left {
   opacity: 0;
   transform: translateX(-40px);
   transition: opacity 0.7s ease, transform 0.7s ease;
 }
-
 .reveal-left.visible {
   opacity: 1;
   transform: translateX(0);
 }
 
-/* ── Polaroid scatter pile ── */
+/* ── Editorial section divider (deep ↔ paper boundaries) ── */
+.section-divider {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  padding: 24px 48px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--color-mute);
+  background: var(--color-abyss);
+}
+.section-divider .line {
+  flex: 1;
+  height: 1px;
+  background: var(--color-hairline);
+}
+.section-divider .num { color: var(--color-lava); }
+
+/* ── CSS snow particles (transparent, no video bg tint) ── */
+.snow {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 0;
+}
+.snow span {
+  position: absolute;
+  top: -10vh;
+  background: var(--color-paper);
+  border-radius: 50%;
+  opacity: 0;
+  animation-name: snowfall;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  will-change: transform, opacity;
+}
+@keyframes snowfall {
+  0%   { transform: translate3d(0, 0, 0);             opacity: 0; }
+  10%  { opacity: var(--op, 0.6); }
+  90%  { opacity: var(--op, 0.6); }
+  100% { transform: translate3d(var(--drift, 0), 110vh, 0); opacity: 0; }
+}
+
+/* ── Subtle film grain overlay for dark sections ── */
+.grain { position: relative; }
+.grain::before {
+  content: "";
+  position: absolute; inset: 0;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/><feColorMatrix values='0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 0.08 0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+  opacity: 0.5;
+  pointer-events: none;
+  mix-blend-mode: overlay;
+  z-index: 1;
+}
+
+/* ── Editorial CTA (used on Hero + Contact) ── */
+.cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 24px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  text-decoration: none;
+  border: 1px solid var(--color-lava);
+  color: var(--color-lava);
+  background: transparent;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+.cta.primary {
+  background: var(--color-lava);
+  color: var(--color-abyss);
+}
+.cta:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: 4px 4px 0 var(--color-lava);
+}
+.cta.primary:hover {
+  background: transparent;
+  color: var(--color-lava);
+}
+.cta .arrow { transition: transform 0.25s; }
+.cta:hover .arrow { transform: translateX(4px); }
+
+/* ── Polaroid pile (cream paper, italic captions, warm shadow) ── */
 .polaroid-pile {
   position: relative;
   width: 260px;
@@ -65,11 +161,11 @@ img {
   position: absolute;
   top: 0; left: 0;
   width: 240px;
-  background: white;
-  padding: 12px 12px 42px 12px;
-  box-shadow: 3px 4px 18px rgba(0,0,0,0.14);
+  background: var(--color-cream);
+  padding: 12px 12px 48px 12px;
+  box-shadow: 4px 6px 28px rgba(10, 26, 47, 0.18), 0 1px 2px rgba(10, 26, 47, 0.08);
   transform: rotate(var(--rot)) translate(var(--tx), var(--ty));
-  transition: transform 0.45s cubic-bezier(0.34, 1.56, 0.64, 1),
+  transition: transform 0.55s cubic-bezier(0.34, 1.56, 0.64, 1),
               box-shadow 0.3s ease;
   will-change: transform;
 }
@@ -79,49 +175,59 @@ img {
   height: 216px;
   object-fit: cover;
   display: block;
+  filter: contrast(1.05) saturate(0.92) sepia(0.04);
 }
 
 .polaroid-card span {
   position: absolute;
-  bottom: 10px;
+  bottom: 12px;
   left: 0; right: 0;
   text-align: center;
-  font-size: 12px;
-  color: #aaa;
+  font-family: var(--font-display);
   font-style: italic;
+  font-size: 14px;
+  color: var(--color-ink);
+  opacity: 0.7;
 }
 
 /* scattered positions on pile hover — wider fan */
 .polaroid-pile:hover .polaroid-card:nth-child(1) {
   transform: rotate(-16deg) translate(-320px, -20px);
-  box-shadow: 6px 8px 24px rgba(0,0,0,0.17);
+  box-shadow: 6px 8px 30px rgba(10,26,47,0.22);
 }
 .polaroid-pile:hover .polaroid-card:nth-child(2) {
   transform: rotate(-6deg) translate(-230px, -230px);
-  box-shadow: 6px 8px 24px rgba(0,0,0,0.17);
+  box-shadow: 6px 8px 30px rgba(10,26,47,0.22);
 }
 .polaroid-pile:hover .polaroid-card:nth-child(3) {
   transform: rotate(3deg) translate(-60px, -280px);
-  box-shadow: 6px 8px 24px rgba(0,0,0,0.17);
+  box-shadow: 6px 8px 30px rgba(10,26,47,0.22);
 }
 .polaroid-pile:hover .polaroid-card:nth-child(4) {
   transform: rotate(10deg) translate(120px, -265px);
-  box-shadow: 6px 8px 24px rgba(0,0,0,0.17);
+  box-shadow: 6px 8px 30px rgba(10,26,47,0.22);
 }
 .polaroid-pile:hover .polaroid-card:nth-child(5) {
   transform: rotate(17deg) translate(280px, -170px);
-  box-shadow: 6px 8px 24px rgba(0,0,0,0.17);
+  box-shadow: 6px 8px 30px rgba(10,26,47,0.22);
 }
 .polaroid-pile:hover .polaroid-card:nth-child(6) {
   transform: rotate(22deg) translate(330px, 40px);
-  box-shadow: 6px 8px 24px rgba(0,0,0,0.17);
+  box-shadow: 6px 8px 30px rgba(10,26,47,0.22);
 }
 .polaroid-pile:hover .polaroid-card:nth-child(7) {
   transform: rotate(-11deg) translate(-280px, 150px);
-  box-shadow: 6px 8px 24px rgba(0,0,0,0.17);
+  box-shadow: 6px 8px 30px rgba(10,26,47,0.22);
 }
 
-/* ── Mobile swipe carousel ── */
+/* individual card hover — lift forward */
+.polaroid-card:hover {
+  z-index: 10 !important;
+  box-shadow: 8px 12px 36px rgba(10, 26, 47, 0.28) !important;
+  filter: brightness(1.02);
+}
+
+/* ── Mobile swipe carousel (matched palette) ── */
 .polaroid-carousel {
   display: flex;
   overflow-x: auto;
@@ -137,29 +243,24 @@ img {
   flex-shrink: 0;
   scroll-snap-align: center;
   width: 220px;
-  background: white;
-  padding: 10px 10px 36px 10px;
-  box-shadow: 3px 4px 16px rgba(0,0,0,0.14);
-  border-radius: 2px;
+  background: var(--color-cream);
+  padding: 10px 10px 40px 10px;
+  box-shadow: 4px 6px 22px rgba(10, 26, 47, 0.18);
 }
 .polaroid-carousel-card img {
   width: 200px;
   height: 200px;
   object-fit: cover;
   display: block;
+  filter: contrast(1.05) saturate(0.92) sepia(0.04);
 }
 .polaroid-carousel-card span {
   display: block;
   text-align: center;
-  font-size: 12px;
-  color: #aaa;
+  font-family: var(--font-display);
   font-style: italic;
-  margin-top: 8px;
-}
-
-/* individual card hover — lift forward */
-.polaroid-card:hover {
-  z-index: 10 !important;
-  box-shadow: 8px 12px 32px rgba(0,0,0,0.22) !important;
-  filter: brightness(1.03);
+  font-size: 13px;
+  color: var(--color-ink);
+  opacity: 0.7;
+  margin-top: 6px;
 }

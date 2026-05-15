@@ -1,16 +1,14 @@
 export const Footer = () => {
-    const year = new Date().getFullYear();
     return (
-        <footer className="border-t border-white/10 bg-[#3e5873]/40 backdrop-blur py-2 text-gray-400">
-            <div className="mx-auto max-w-3xl px-4 text-[#E8EDF2]">
-                <div className="space-y-1 text-center text-sm leading-6">
-                    <p>© {year} Zixuan Zou.</p>
-                    <p>All rights to "Luo Xiaohei" characters belong to MTJJ / HMCH Animation Technology Co., Ltd.</p>
-                    <p>This website is for personal and non-commercial use only.</p>
+        <footer className="bg-abyss border-t" style={{ borderTopColor: 'var(--color-hairline)' }}>
+            <div className="max-w-7xl mx-auto px-6 md:px-12 py-8 md:py-10 flex flex-col md:flex-row md:items-center md:justify-between gap-3 md:gap-6 text-mute">
+                <div className="font-mono text-[10px] tracking-[0.2em] uppercase text-center md:text-left">
+                    © <span className="text-lava">Zixuan Zou</span>
                 </div>
-
+                <div className="text-[11px] leading-relaxed text-center md:text-right max-w-xl md:max-w-md font-sans">
+                    All rights to "Luo Xiaohei" characters belong to MTJJ / HMCH Animation Technology Co., Ltd. This website is for personal and non-commercial use only.
+                </div>
             </div>
         </footer>
-
     );
-}
+};

@@ -1,54 +1,85 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
-export const Navbar = ({ menuOpen, setMenuOpen, setPage }) => {
+export const Navbar = ({ menuOpen, setMenuOpen, setPage, currentPage }) => {
+    const [scrolled, setScrolled] = useState(false);
 
     useEffect(() => {
         document.body.style.overflow = menuOpen ? "hidden" : '';
     }, [menuOpen]);
 
+    useEffect(() => {
+        const onScroll = () => setScrolled(window.scrollY > 80);
+        onScroll();
+        window.addEventListener('scroll', onScroll, { passive: true });
+        return () => window.removeEventListener('scroll', onScroll);
+    }, []);
+
     const goHome = () => setPage('home');
 
     const scrollTo = (id) => {
-        setPage('home');
-        setTimeout(() => {
+        const alreadyHome = currentPage === 'home';
+        if (alreadyHome) {
             document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
-        }, 50);
+            return;
+        }
+        // cross-page: switch to home, then jump (no smooth) to the anchor
+        setPage('home');
+        requestAnimationFrame(() => {
+            requestAnimationFrame(() => {
+                document.getElementById(id)?.scrollIntoView({ behavior: 'auto' });
+            });
+        });
     };
 
-    const linkClass = "text-[#E8EDF2] hover:text-white transition-colors cursor-pointer bg-transparent border-none font-medium text-lg \
-relative after:absolute after:bottom-0 after:left-0 after:bg-white \
-after:h-[2px] after:w-0 hover:after:w-full after:transition-all after:duration-300";
+    // pages with paper bg at top — need dark text when navbar is transparent
+    const isOverPaper = !scrolled && (currentPage === 'projects' || currentPage === 'experience');
+    const baseText = isOverPaper ? 'text-ink' : 'text-paper';
+    const linkText = isOverPaper ? 'text-ink/70' : 'text-paper/75';
+
+    const linkClass =
+        `font-mono text-[11px] tracking-[0.2em] uppercase ${linkText} hover:text-lava transition-colors cursor-pointer bg-transparent border-none relative group`;
 
     return (
-        <nav className="fixed top-0 w-full z-40 bg-[#3e5873]/70 backdrop-blur-md border-white/10 shadow-lg">
-            <div className="max-w-7xl mx-auto px-4">
+        <nav
+            className={`fixed top-0 w-full z-40 transition-all duration-300 ${
+                scrolled ? "bg-abyss/85 backdrop-blur-md border-b border-hairline" : "bg-transparent"
+            }`}
+            style={scrolled ? { borderBottomColor: 'var(--color-hairline)' } : {}}
+        >
+            <div className="max-w-7xl mx-auto px-6 md:px-12">
                 <div className="flex justify-between items-center h-16">
-                    <button onClick={goHome} className="text-xl font-bold text-white bg-transparent border-none cursor-pointer group relative">
-                        <span className="relative after:absolute after:bottom-0 after:left-1/2 after:-translate-x-1/2 after:h-[2px] after:w-0 after:bg-white after:transition-all after:duration-300 group-hover:after:w-full">
-                            ZZ
-                        </span>
+                    <button
+                        onClick={goHome}
+                        className={`font-mono text-[11px] tracking-[0.2em] uppercase ${baseText} bg-transparent border-none cursor-pointer flex items-center gap-2`}
+                    >
+                        <span>ZZ</span>
+                        <span className="text-lava">⟡</span>
                     </button>
+
                     <div
-                        className="w-7 h-5 relative cursor-pointer z-40 md:hidden"
+                        className={`text-2xl relative cursor-pointer z-40 md:hidden bg-transparent border-none ${baseText}`}
                         onClick={() => setMenuOpen((prev) => !prev)}
                     >
                         &#9776;
                     </div>
 
-                    <div className="hidden md:flex items-center space-x-10 text-lg font-medium">
-                        <button onClick={() => scrollTo('about')} className={linkClass}>About</button>
-                        <button onClick={() => setPage('experience')} className={linkClass}>Experience</button>
-                        <button onClick={() => setPage('projects')} className={linkClass}>Projects</button>
-                        <button onClick={() => scrollTo('contact')} className={linkClass}>Contact</button>
+                    <div className="hidden md:flex items-center gap-9">
+                        <button onClick={() => setPage('experience')} className={linkClass}>
+                            <span className="opacity-0 group-hover:opacity-100 text-lava transition-opacity mr-1">⟡</span>Experience
+                        </button>
+                        <button onClick={() => setPage('projects')} className={linkClass}>
+                            <span className="opacity-0 group-hover:opacity-100 text-lava transition-opacity mr-1">⟡</span>Projects
+                        </button>
+                        <button onClick={() => scrollTo('contact')} className={linkClass}>
+                            <span className="opacity-0 group-hover:opacity-100 text-lava transition-opacity mr-1">⟡</span>Contact
+                        </button>
                         <a
                             href="https://drive.google.com/file/d/1Bw-6LkZXdc2J0rBQzQcbRa4VI2YemTdb/view?usp=sharing"
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="text-[#E8EDF2] hover:text-white transition-colors
-                            relative after:absolute after:bottom-0 after:left-0 after:bg-white
-                            after:h-[2px] after:w-0 hover:after:w-full after:transition-all after:duration-300"
+                            className={linkClass + " no-underline"}
                         >
-                            Resume
+                            <span className="opacity-0 group-hover:opacity-100 text-lava transition-opacity mr-1">⟡</span>Resume
                         </a>
                     </div>
                 </div>

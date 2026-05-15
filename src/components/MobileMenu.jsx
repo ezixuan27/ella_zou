@@ -9,46 +9,56 @@ export const MobileMenu = ({ menuOpen, setMenuOpen, setPage }) => {
 
     const scrollTo = (id) => {
         close();
+        // delay so the menu's close transition can start; then anchor without smooth scroll
         setPage('home');
-        setTimeout(() => {
-            document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
-        }, 50);
+        requestAnimationFrame(() => {
+            requestAnimationFrame(() => {
+                document.getElementById(id)?.scrollIntoView({ behavior: 'auto' });
+            });
+        });
     };
 
-    const linkClass = `text-xl font-semibold my-4 text-[#E8EDF2]/80 hover:text-white transition-colors cursor-pointer
-        bg-transparent border-none
-        relative after:absolute after:bottom-0 after:left-0 after:bg-white
-        after:h-[2px] after:w-0 hover:after:w-full after:transition-all after:duration-300
-        ${menuOpen ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-5"}`;
+    const itemClass = `font-display italic text-paper/85 hover:text-lava transition-colors cursor-pointer bg-transparent border-none text-4xl md:text-5xl text-left flex items-baseline gap-4 my-1
+        ${menuOpen ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-3"}
+        transition-all duration-500`;
+
+    const numClass = "font-mono text-[11px] tracking-[0.25em] uppercase text-lava not-italic";
 
     return (
-        <div className={`fixed top-0 left-0 w-full bg-[#3e5873] z-40 flex flex-col items-center justify-center
-            transition-all duration-300 ease-in-out
+        <div className={`fixed top-0 left-0 w-full bg-abyss z-40 flex flex-col items-start justify-center px-8 grain
+            transition-all duration-500 ease-in-out
             ${menuOpen
                 ? "h-screen opacity-100 pointer-events-auto"
                 : "h-0 opacity-0 pointer-events-none"
             }
         `}>
             <button onClick={close}
-                className="absolute top-6 right-6 text-white text-3xl focus:outline-none cursor-pointer bg-transparent border-none"
+                className="absolute top-6 right-6 text-lava text-3xl focus:outline-none cursor-pointer bg-transparent border-none z-10"
                 aria-label="Close Menu"
             >
-                &times;
+                ×
             </button>
 
-            <button onClick={() => scrollTo('about')} className={linkClass}>ABOUT</button>
-            <button onClick={() => goTo('experience')} className={linkClass}>EXPERIENCE</button>
-            <button onClick={() => goTo('projects')} className={linkClass}>PROJECTS</button>
-            <button onClick={() => scrollTo('contact')} className={linkClass}>CONTACT</button>
-            <a
-                href="https://drive.google.com/file/d/1XL0eKA0bFRUUoVSaPtx-xEb5jrzDAqCK/view?usp=sharing"
-                target="_blank"
-                rel="noopener noreferrer"
-                onClick={close}
-                className={linkClass}
-            >
-                RESUME
-            </a>
+            <nav className="flex flex-col gap-1 z-10 mt-10">
+                <button onClick={() => goTo('experience')} className={itemClass}>
+                    <span className={numClass}>01</span>Experience
+                </button>
+                <button onClick={() => goTo('projects')} className={itemClass}>
+                    <span className={numClass}>02</span>Projects
+                </button>
+                <button onClick={() => scrollTo('contact')} className={itemClass}>
+                    <span className={numClass}>03</span>Contact
+                </button>
+                <a
+                    href="https://drive.google.com/file/d/1XL0eKA0bFRUUoVSaPtx-xEb5jrzDAqCK/view?usp=sharing"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    onClick={close}
+                    className={itemClass}
+                >
+                    <span className={numClass}>04</span>Resume ↗
+                </a>
+            </nav>
         </div>
     );
 };

@@ -1,82 +1,90 @@
-import { useRef, useEffect } from 'react';
+import { useMemo } from 'react';
 import { RevealOnScroll } from '../RevealOnScroll';
 
-export const Home = ({ setPage }) => {
-    const videoRef = useRef(null);
+const SNOW_COUNT = 50;
 
-    useEffect(() => {
-        const video = videoRef.current;
-        if (!video) return;
-        video.play().catch(() => {
-            // retry once on user interaction
-            const resume = () => { video.play(); document.removeEventListener('click', resume); };
-            document.addEventListener('click', resume, { once: true });
-        });
-    }, []);
+export const Home = ({ setPage }) => {
+    // generate randomized snowflakes once per mount
+    const snowflakes = useMemo(() =>
+        Array.from({ length: SNOW_COUNT }, () => {
+            const size = 2 + Math.random() * 4;       // 2 – 6 px
+            const drift = (Math.random() - 0.5) * 60; // -30 to +30 vw drift
+            return {
+                left: Math.random() * 100,            // 0 – 100 %
+                size,
+                duration: 12 + Math.random() * 18,    // 12 – 30s fall
+                delay: -Math.random() * 25,           // negative = start mid-animation
+                opacity: 0.4 + Math.random() * 0.5,   // 0.4 – 0.9
+                drift,
+            };
+        }),
+    []);
 
     return (
         <section
             id="home"
-            className="min-h-screen w-full flex items-center justify-center relative py-20 overflow-hidden"
+            className="relative min-h-screen w-full bg-abyss overflow-hidden grain"
         >
-            <div className="absolute inset-0 w-full h-full z-0">
-                <video
-                    ref={videoRef}
-                    autoPlay
-                    loop
-                    muted
-                    playsInline
-                    preload="auto"
-                    className="w-full h-full object-cover mix-blend-screen opacity-80 pointer-events-none"
-                >
-                    <source src="Snow.mp4" type="video/mp4" />
-                </video>
+            {/* CSS snow particles — true transparency, no bg wash */}
+            <div className="snow" aria-hidden="true">
+                {snowflakes.map((s, i) => (
+                    <span
+                        key={i}
+                        style={{
+                            left: `${s.left}%`,
+                            width: `${s.size}px`,
+                            height: `${s.size}px`,
+                            animationDuration: `${s.duration}s`,
+                            animationDelay: `${s.delay}s`,
+                            '--op': s.opacity,
+                            '--drift': `${s.drift}vw`,
+                        }}
+                    />
+                ))}
             </div>
 
-            <RevealOnScroll>
-                <div className="text-center max-w-full md:mx-auto z-10 px-4 mt-15 md:mt-45 relative">
-                    <h1 className="leading-none">
-                        <span className="block font-['Josefin_Sans',_sans-serif] text-sm md:text-base italic tracking-[0.2em] text-[#395279] opacity-70 mb-3">
-                            hi, i'm
+            {/* Content frame */}
+            <div className="relative z-10 min-h-screen flex flex-col justify-center px-6 md:px-12 pt-28 md:pt-32 pb-12">
+
+                {/* Hero title block */}
+                <RevealOnScroll>
+                    <div className="mt-12 md:mt-0">
+                        <span className="block font-sans text-[10px] md:text-xs tracking-[0.4em] uppercase text-paper/55 mb-6 md:mb-8">
+                            Hi, I'm —
                         </span>
-                        <span
-                            className="block font-['Playfair_Display',_serif] font-black text-[#d1865e]"
-                            style={{ fontSize: 'clamp(64px, 8vw, 118px)' }}
+                        <h1
+                            className="font-display font-light text-paper leading-[0.88] tracking-[-0.04em]"
+                            style={{ fontSize: 'clamp(72px, 14vw, 220px)', fontVariationSettings: '"opsz" 144' }}
                         >
-                            Zixuan Zou.
-                        </span>
-                    </h1>
-
-                    <p className="text-[#3e577b] text-xl md:text-2xl mt-8 md:mb-8 max-w-4xl mx-auto">
-                        I usually go by Ella!
-                        I'm currently a second-year student at Northeastern Univerisity in Boston, MA, pursuing a B.S. in Computer Science
-                        with a minor in Supply Chain Management. Nice to meet you!
-                    </p>
-
-                    <div className="flex flex-col justify-center items-center space-y-20 py-10 md:py-20 md:flex-row md:space-x-20 md:space-y-0">
-                        <button
-                            onClick={() => setPage('projects')}
-                            className="bg-[#3a537b] shadow-sm shadow-[#4E8EF7]/50 inline-flex items-center justify-center border border-[#4E8EF7] text-[#d0865e] px-6 rounded font-medium h-12
-                        transition-all duration-200 hover:-translate-y-0.5 hover:bg-[#4E8EF7]/90 hover:text-white
-                        hover:shadow-[0_0_15px_rgba(59,130,246,0.4)]">
-                            View Projects
-                        </button>
-                        <div className="relative">
-                            <a
-                                href="#contact"
-                                className="bg-[#d0865e] shadow-sm shadow-[#E86D2E]/50 inline-flex items-center justify-center border border-[#E86D2E] text-white px-6 rounded font-medium h-12
-                            transition-all duration-200 hover:-translate-y-0.5 hover:bg-[#E86D2E]/65 hover:text-white 
-                            hover:shadow-[0_0_15px_rgba(232,109,46,0.4)]">
-                                Contact Me
-                            </a>
-                            <img src="小黑waving.gif"
-                                alt="someGif"
-                                className="absolute -top-18 left-1/2 w-20 h-20 md:-top-28 md:left-1/3 md:w-30 md:h-30 pointer-events-none select-none z-10"
-                            />
-                        </div>
+                            Zixuan <span className="italic font-normal text-lava">Zou.</span>
+                        </h1>
                     </div>
+                </RevealOnScroll>
+
+                {/* Bottom row — tagline + CTAs */}
+                <div className="mt-12 md:mt-16 flex flex-col md:flex-row md:items-end md:justify-between gap-8 md:gap-12">
+                    <RevealOnScroll>
+                        <p className="max-w-xl font-display font-light italic text-paper/85 text-lg md:text-2xl leading-snug">
+                            I usually go by <span className="text-lava not-italic font-normal">Ella</span> — a second-year CS student at Northeastern in Boston, MA, with a minor in Supply Chain Management. <span className="not-italic font-normal text-paper">Nice to meet you.</span>
+                        </p>
+                    </RevealOnScroll>
+
+                    <RevealOnScroll>
+                        <div className="flex gap-3 md:gap-4 flex-shrink-0">
+                            <button
+                                type="button"
+                                onClick={() => setPage('projects')}
+                                className="cta primary"
+                            >
+                                View Work <span className="arrow">→</span>
+                            </button>
+                            <a href="#contact" className="cta">
+                                Contact
+                            </a>
+                        </div>
+                    </RevealOnScroll>
                 </div>
-            </RevealOnScroll>
+            </div>
         </section>
     );
 }
