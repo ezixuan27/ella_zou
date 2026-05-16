@@ -9,7 +9,6 @@ export const MobileMenu = ({ menuOpen, setMenuOpen, setPage }) => {
 
     const scrollTo = (id) => {
         close();
-        // delay so the menu's close transition can start; then anchor without smooth scroll
         setPage('home');
         requestAnimationFrame(() => {
             requestAnimationFrame(() => {
@@ -25,13 +24,22 @@ export const MobileMenu = ({ menuOpen, setMenuOpen, setPage }) => {
     const numClass = "font-mono text-[11px] tracking-[0.25em] uppercase text-lava not-italic";
 
     return (
-        <div className={`fixed top-0 left-0 w-full bg-abyss z-40 flex flex-col items-start justify-center px-8 grain
-            transition-all duration-500 ease-in-out
-            ${menuOpen
-                ? "h-screen opacity-100 pointer-events-auto"
-                : "h-0 opacity-0 pointer-events-none"
-            }
-        `}>
+        <div
+            style={{
+                position: 'fixed',
+                top: 0,
+                left: 0,
+                width: '100%',
+                height: menuOpen ? '100vh' : 0,
+                backgroundColor: 'var(--color-abyss)',
+                zIndex: 50,
+                opacity: menuOpen ? 1 : 0,
+                pointerEvents: menuOpen ? 'auto' : 'none',
+                transition: 'height 500ms ease-in-out, opacity 500ms ease-in-out',
+                overflow: 'hidden',
+            }}
+            className="flex flex-col items-start justify-center px-8 grain"
+        >
             <button onClick={close}
                 className="absolute top-6 right-6 text-lava text-3xl focus:outline-none cursor-pointer bg-transparent border-none z-10"
                 aria-label="Close Menu"
@@ -56,7 +64,7 @@ export const MobileMenu = ({ menuOpen, setMenuOpen, setPage }) => {
                     onClick={close}
                     className={itemClass}
                 >
-                    <span className={numClass}>04</span>Resume ↗
+                    <span className={numClass}>04</span>Resume
                 </a>
             </nav>
         </div>

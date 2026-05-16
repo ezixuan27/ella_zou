@@ -14,9 +14,9 @@
   --color-mute:     #4A6B8C;
   --color-hairline: rgba(255, 90, 31, 0.4);
 
-  --font-display: 'Fraunces', Georgia, serif;
-  --font-sans:    'Inter', system-ui, sans-serif;
-  --font-mono:    'JetBrains Mono', ui-monospace, monospace;
+  --font-display: 'Fraunces', 'LXGW WenKai', Georgia, serif;
+  --font-sans:    'Inter', 'LXGW WenKai', system-ui, sans-serif;
+  --font-mono:    'JetBrains Mono', 'LXGW WenKai', ui-monospace, monospace;
 }
 
 :root {

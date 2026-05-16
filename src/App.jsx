@@ -28,7 +28,6 @@ function App() {
         className={`min-h-screen transition-opacity duration-700 ${isLoaded ? "opacity-100" : "opacity-0"} bg-abyss text-paper`}
       >
         <Navbar menuOpen={menuOpen} setMenuOpen={setMenuOpen} setPage={setPage} currentPage={currentPage} />
-        <MobileMenu menuOpen={menuOpen} setMenuOpen={setMenuOpen} setPage={setPage} />
 
         {currentPage === 'home' && (
           <>
@@ -43,6 +42,10 @@ function App() {
         <Footer />
         <XiaoHei />
       </div>
+
+      {/* MobileMenu sits OUTSIDE the wrapper so its position: fixed always
+          references the viewport, not a transition/composited parent. */}
+      <MobileMenu menuOpen={menuOpen} setMenuOpen={setMenuOpen} setPage={setPage} />
     </>
   )
 }

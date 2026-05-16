@@ -65,7 +65,7 @@ export const Home = ({ setPage }) => {
                 <div className="mt-12 md:mt-16 flex flex-col md:flex-row md:items-end md:justify-between gap-8 md:gap-12">
                     <RevealOnScroll>
                         <p className="max-w-xl font-display font-light italic text-paper/85 text-lg md:text-2xl leading-snug">
-                            I usually go by <span className="text-lava not-italic font-normal">Ella</span> — a second-year CS student at Northeastern in Boston, MA, with a minor in Supply Chain Management. <span className="not-italic font-normal text-paper">Nice to meet you.</span>
+                            I usually go by <span className="text-lava not-italic font-normal">Ella</span> — a second-year CS student at Northeastern in Boston, MA, with a minor in Supply Chain Management. <span className="not-italic font-normal text-paper">Nice to meet you. 很高兴认识你。</span>
                         </p>
                     </RevealOnScroll>
 

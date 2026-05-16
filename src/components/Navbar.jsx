@@ -49,19 +49,24 @@ export const Navbar = ({ menuOpen, setMenuOpen, setPage, currentPage }) => {
             <div className="max-w-7xl mx-auto px-6 md:px-12">
                 <div className="flex justify-between items-center h-16">
                     <button
+                        type="button"
                         onClick={goHome}
-                        className={`font-mono text-[11px] tracking-[0.2em] uppercase ${baseText} bg-transparent border-none cursor-pointer flex items-center gap-2`}
+                        aria-label="Home"
+                        className={`font-mono text-[11px] tracking-[0.2em] uppercase ${baseText} bg-transparent border-none cursor-pointer inline-flex items-center gap-2 py-3 px-2 -ml-2`}
                     >
                         <span>ZZ</span>
                         <span className="text-lava">⟡</span>
                     </button>
 
-                    <div
-                        className={`text-2xl relative cursor-pointer z-40 md:hidden bg-transparent border-none ${baseText}`}
+                    <button
+                        type="button"
+                        aria-label={menuOpen ? "Close menu" : "Open menu"}
+                        aria-expanded={menuOpen}
                         onClick={() => setMenuOpen((prev) => !prev)}
+                        className={`md:hidden text-2xl leading-none cursor-pointer bg-transparent border-none p-3 -mr-2 ${baseText} z-50 relative`}
                     >
-                        &#9776;
-                    </div>
+                        {menuOpen ? '×' : '☰'}
+                    </button>
 
                     <div className="hidden md:flex items-center gap-9">
                         <button onClick={() => setPage('experience')} className={linkClass}>
