@@ -15,7 +15,7 @@ const experiences = [
     },
     {
         role: "Research Assistant",
-        company: "Course AI Agent Research  ·  Python, n8n",
+        company: "Northeastern University",
         date: "Jun 2025 – Present",
         location: "Boston, MA",
         bullets: [
@@ -35,11 +35,42 @@ const experiences = [
     },
     {
         role: "Business Analyst Intern",
-        company: "Azores Networks  ·  Excel, Jiandaoyun",
+        company: "Azores Networks",
         date: "Jul 2025 – Aug 2025",
         location: "Richardson, TX",
         bullets: [
             "Deployed product-tracking workflows and dashboards to monitor R&D progress and visualize client data.",
+        ],
+    },
+    {
+        role: "Extended School Day Aide",
+        company: "Lewisville Independent School District",
+        date: "Jan 2024 – Jun 2024",
+        location: "Lewisville, TX",
+        bullets: [
+            "Assisted in supervising elementary school students (K-5) in after-school programs.",
+            "Supported students with academic needs.",
+            "Collaborated with the campus leader to implement discipline.",
+        ],
+    },
+    {
+        role: "Server",
+        company: "Mulan Noodle and Grill",
+        date: "Dec 2023 – Jun 2024",
+        location: "Carrollton, TX",
+        bullets: [
+            "Took customer orders, served dishes, and managed table turnover during dinner service.",
+            "Coordinated with kitchen staff on order timing and special requests.",
+        ],
+    },
+    {
+        role: "Crew Member",
+        company: "Youmie's Rice and Yogurt",
+        date: "Jun 2022 – Aug 2022",
+        location: "Plano, TX",
+        bullets: [
+            "Prepped yogurt and rice bowls for daily service.",
+            "Handled the cash register during shifts.",
         ],
     },
 ];
