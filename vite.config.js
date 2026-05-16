@@ -5,5 +5,8 @@ import tailwindcss from '@tailwindcss/vite'
 // https://vite.dev/config/
 export default defineConfig({
   plugins: [react(), tailwindcss()],
-  base: "/ella_zou/"
+  base: "/ella_zou/",
+  build: {
+    chunkSizeWarningLimit: 1000,
+  },
 })
