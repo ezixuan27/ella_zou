@@ -42,9 +42,7 @@ function App() {
         <Footer />
         <XiaoHei />
       </div>
-
-      {/* MobileMenu sits OUTSIDE the wrapper so its position: fixed always
-          references the viewport, not a transition/composited parent. */}
+      
       <MobileMenu menuOpen={menuOpen} setMenuOpen={setMenuOpen} setPage={setPage} />
     </>
   )

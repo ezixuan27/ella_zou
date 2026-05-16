@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { RevealOnScroll } from "../RevealOnScroll";
 
-const EduCard = ({ logo, name, dates, location, subtitle, coursework, courseLabel = "Coursework", activities }) => {
+const EduCard = ({ logo, name, dates, location, subtitle, gpa, coursework, courseLabel = "Coursework", activities }) => {
     const [courseOpen, setCourseOpen] = useState(false);
     const [activitiesOpen, setActivitiesOpen] = useState(false);
 
@@ -21,6 +21,7 @@ const EduCard = ({ logo, name, dates, location, subtitle, coursework, courseLabe
                     </div>
                     <p className="text-sm text-ink/60 mb-0.5">{location}</p>
                     {subtitle && <p className="text-sm font-display italic text-ink/75">{subtitle}</p>}
+                    {gpa && <p className="text-sm font-display italic text-ink/75">GPA: {gpa}</p>}
 
                     {coursework && (
                         <div className="mt-3 border-t border-ink/10">
@@ -236,6 +237,7 @@ export const About = () => {
                                     logo="NU_logo.png" name="Northeastern University"
                                     dates="2024 – Present" location="Boston, MA"
                                     subtitle="B.S. Computer Science · Supply Chain Management Minor"
+                                    gpa="3.9 / 4.0"
                                     coursework={["Algorithms and Data","Object Oriented Design","Global Supply Chain Strategy","Foundations of Data Science","Advanced Linear Algebra","Advanced Mathematical Reasoning","Discrete Structures","Fundamentals of CS I/II","Introduction to Cybersecurity","Supply Chain & Operation Management","Introduction to Database Design"]}
                                     activities={[
                                         { name: "Kaleidoscope (Khoury's Club Council)", role: "Events & Operations", date: "2025 – Present" },
@@ -246,7 +248,7 @@ export const About = () => {
                                 <EduCard
                                     logo="hebron_logo.png" name="Hebron High School"
                                     dates="2020 – 2024" location="Carrollton, TX"
-                                    subtitle="GPA: 3.86 / 4.0"
+                                    gpa="3.86 / 4.0"
                                     coursework={["Calculus BC","Computer Science A","Macroeconomics","US Government","Physics 1","Physics C","World History","Human Geography","Psychology","Chinese"]}
                                     courseLabel="AP Courses"
                                     activities={[
