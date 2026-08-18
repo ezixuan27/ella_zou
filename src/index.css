@@ -149,118 +149,64 @@ img {
 .cta .arrow { transition: transform 0.25s; }
 .cta:hover .arrow { transform: translateX(4px); }
 
-/* ── Polaroid pile (cream paper, italic captions, warm shadow) ── */
-.polaroid-pile {
-  position: relative;
-  width: 260px;
-  height: 280px;
-  cursor: pointer;
+/* ── Polaroid strip (straight, drag-to-scroll, scales to many photos) ── */
+.polaroid-strip {
+  display: flex;
+  gap: 1.5rem;
+  overflow-x: auto;
+  scroll-snap-type: x proximity;
+  -webkit-overflow-scrolling: touch;
+  padding: 1.75rem 2rem 2rem;
+  scrollbar-width: none;
+  cursor: grab;
+  user-select: none;
+  -webkit-user-select: none;
+  /* fade both edges so the row reads as "there's more to scroll" */
+  -webkit-mask-image: linear-gradient(to right, transparent, #000 4%, #000 96%, transparent);
+          mask-image: linear-gradient(to right, transparent, #000 4%, #000 96%, transparent);
 }
+.polaroid-strip::-webkit-scrollbar { display: none; }
+.polaroid-strip.is-dragging { cursor: grabbing; scroll-snap-type: none; }
 
-.polaroid-card {
-  position: absolute;
-  top: 0; left: 0;
-  width: 240px;
+.polaroid-strip-card {
+  position: relative;
+  flex-shrink: 0;
+  scroll-snap-align: center;
+  width: 210px;
+  margin: 0;
   background: var(--color-cream);
-  padding: 12px 12px 48px 12px;
-  box-shadow: 4px 6px 28px rgba(10, 26, 47, 0.18), 0 1px 2px rgba(10, 26, 47, 0.08);
-  transform: rotate(var(--rot)) translate(var(--tx), var(--ty));
-  transition: transform 0.55s cubic-bezier(0.34, 1.56, 0.64, 1),
+  padding: 14px 14px 18px 14px;
+  box-shadow: 4px 6px 24px rgba(10, 26, 47, 0.16), 0 1px 2px rgba(10, 26, 47, 0.08);
+  transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1),
               box-shadow 0.3s ease;
   will-change: transform;
 }
+@media (min-width: 768px) {
+  .polaroid-strip-card { width: 240px; }
+}
 
-.polaroid-card img {
-  width: 216px;
-  height: 216px;
+.polaroid-strip-card img {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  height: auto;
   object-fit: cover;
   display: block;
   filter: contrast(1.05) saturate(0.92) sepia(0.04);
+  -webkit-user-drag: none;
 }
 
-.polaroid-card span {
-  position: absolute;
-  bottom: 12px;
-  left: 0; right: 0;
+.polaroid-strip-card figcaption {
   text-align: center;
   font-family: var(--font-display);
   font-style: italic;
   font-size: 14px;
   color: var(--color-ink);
   opacity: 0.7;
+  margin-top: 14px;
 }
 
-/* scattered positions on pile hover — wider fan */
-.polaroid-pile:hover .polaroid-card:nth-child(1) {
-  transform: rotate(-16deg) translate(-320px, -20px);
-  box-shadow: 6px 8px 30px rgba(10,26,47,0.22);
-}
-.polaroid-pile:hover .polaroid-card:nth-child(2) {
-  transform: rotate(-6deg) translate(-230px, -230px);
-  box-shadow: 6px 8px 30px rgba(10,26,47,0.22);
-}
-.polaroid-pile:hover .polaroid-card:nth-child(3) {
-  transform: rotate(3deg) translate(-60px, -280px);
-  box-shadow: 6px 8px 30px rgba(10,26,47,0.22);
-}
-.polaroid-pile:hover .polaroid-card:nth-child(4) {
-  transform: rotate(10deg) translate(120px, -265px);
-  box-shadow: 6px 8px 30px rgba(10,26,47,0.22);
-}
-.polaroid-pile:hover .polaroid-card:nth-child(5) {
-  transform: rotate(17deg) translate(280px, -170px);
-  box-shadow: 6px 8px 30px rgba(10,26,47,0.22);
-}
-.polaroid-pile:hover .polaroid-card:nth-child(6) {
-  transform: rotate(22deg) translate(330px, 40px);
-  box-shadow: 6px 8px 30px rgba(10,26,47,0.22);
-}
-.polaroid-pile:hover .polaroid-card:nth-child(7) {
-  transform: rotate(-11deg) translate(-280px, 150px);
-  box-shadow: 6px 8px 30px rgba(10,26,47,0.22);
-}
-
-/* individual card hover — lift forward */
-.polaroid-card:hover {
-  z-index: 10 !important;
-  box-shadow: 8px 12px 36px rgba(10, 26, 47, 0.28) !important;
-  filter: brightness(1.02);
-}
-
-/* ── Mobile swipe carousel (matched palette) ── */
-.polaroid-carousel {
-  display: flex;
-  overflow-x: auto;
-  scroll-snap-type: x mandatory;
-  -webkit-overflow-scrolling: touch;
-  gap: 1.25rem;
-  padding: 1rem 2rem 1.5rem;
-  scrollbar-width: none;
-}
-.polaroid-carousel::-webkit-scrollbar { display: none; }
-
-.polaroid-carousel-card {
-  flex-shrink: 0;
-  scroll-snap-align: center;
-  width: 220px;
-  background: var(--color-cream);
-  padding: 10px 10px 40px 10px;
-  box-shadow: 4px 6px 22px rgba(10, 26, 47, 0.18);
-}
-.polaroid-carousel-card img {
-  width: 200px;
-  height: 200px;
-  object-fit: cover;
-  display: block;
-  filter: contrast(1.05) saturate(0.92) sepia(0.04);
-}
-.polaroid-carousel-card span {
-  display: block;
-  text-align: center;
-  font-family: var(--font-display);
-  font-style: italic;
-  font-size: 13px;
-  color: var(--color-ink);
-  opacity: 0.7;
-  margin-top: 6px;
+/* lift on hover — suppressed while the strip is being dragged */
+.polaroid-strip:not(.is-dragging) .polaroid-strip-card:hover {
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: 8px 14px 34px rgba(10, 26, 47, 0.26);
 }

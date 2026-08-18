@@ -76,9 +76,19 @@ const EduCard = ({ logo, name, dates, location, subtitle, gpa, coursework, cours
     );
 };
 
+const photos = [
+    { src: 'mypic.jpeg',        label: 'me :)' },
+    { src: 'friends.jpeg',      label: 'friends ♡' },
+    { src: 'candypic.jpg',      label: 'Candy' },
+    { src: 'candysleep.JPG',    label: 'Candy sleeping' },
+    { src: 'photo-selfie.jpeg', label: 'another me', pos: 'top' },
+    { src: 'photo-climb.png',   label: 'ice climbing' },
+];
+
 export const About = () => {
     const timelineRef = useRef(null);
     const lineRef = useRef(null);
+    const stripRef = useRef(null);
 
     useEffect(() => {
         const handleScroll = () => {
@@ -93,6 +103,36 @@ export const About = () => {
         window.addEventListener("scroll", handleScroll, { passive: true });
         handleScroll();
         return () => window.removeEventListener("scroll", handleScroll);
+    }, []);
+
+    // Drag-to-scroll for the polaroid strip (mouse only; touch uses native scroll).
+    useEffect(() => {
+        const el = stripRef.current;
+        if (!el) return;
+        let down = false, startX = 0, startScroll = 0;
+        const onDown = (e) => {
+            if (e.pointerType === "touch") return;
+            down = true;
+            startX = e.pageX;
+            startScroll = el.scrollLeft;
+            el.classList.add("is-dragging");
+        };
+        const onMove = (e) => {
+            if (!down) return;
+            el.scrollLeft = startScroll - (e.pageX - startX);
+        };
+        const onUp = () => {
+            down = false;
+            el.classList.remove("is-dragging");
+        };
+        el.addEventListener("pointerdown", onDown);
+        window.addEventListener("pointermove", onMove);
+        window.addEventListener("pointerup", onUp);
+        return () => {
+            el.removeEventListener("pointerdown", onDown);
+            window.removeEventListener("pointermove", onMove);
+            window.removeEventListener("pointerup", onUp);
+        };
     }, []);
 
     return (
@@ -175,45 +215,28 @@ export const About = () => {
                         </div>
                     </RevealOnScroll>
 
-                    {/* Polaroid pile (luxe-ified via index.css) */}
-                    {(() => {
-                        const photos = [
-                            { src: 'mypic.jpeg',         label: 'me :)',           rot: '-8deg',  tx: '-4px',  ty: '2px'  },
-                            { src: 'friends.jpeg',       label: 'friends ♡',       rot: '5deg',   tx: '3px',   ty: '-4px' },
-                            { src: 'candypic.jpg',       label: 'Candy',           rot: '-3deg',  tx: '6px',   ty: '6px'  },
-                            { src: 'candysleep.JPG',     label: 'Candy sleeping',  rot: '10deg',  tx: '-2px',  ty: '3px'  },
-                            { src: 'photo-selfie.jpeg',  label: 'another me',      rot: '-6deg',  tx: '4px',   ty: '-2px', pos: 'top' },
-                            { src: 'photo-climb.png',    label: 'ice climbing',    rot: '-4deg',  tx: '2px',   ty: '-6px' },
-                        ];
-                        return (<>
-                            <div className="hidden md:flex justify-center mt-32 mb-20">
-                                <div className="polaroid-pile">
-                                    {photos.map((p, i) => (
-                                        <div key={i} className="polaroid-card" style={{ '--rot': p.rot, '--tx': p.tx, '--ty': p.ty, zIndex: 7 - i }}>
-                                            <img src={p.src} alt={p.label} style={{ objectPosition: p.pos || 'center' }}
-                                                draggable={false}
-                                                onContextMenu={(e) => e.preventDefault()} />
-                                            <span>{p.label}</span>
-                                        </div>
-                                    ))}
-                                </div>
-                            </div>
-
-                            <div className="md:hidden my-12">
-                                <div className="polaroid-carousel">
-                                    {photos.map((p, i) => (
-                                        <div key={i} className="polaroid-carousel-card">
-                                            <img src={p.src} alt={p.label} style={{ objectPosition: p.pos || 'center' }}
-                                                draggable={false}
-                                                onContextMenu={(e) => e.preventDefault()} />
-                                            <span>{p.label}</span>
-                                        </div>
-                                    ))}
-                                </div>
-                                <p className="text-center text-ink/40 text-[10px] font-mono mt-3 tracking-[0.3em] uppercase">swipe ›</p>
-                            </div>
-                        </>);
-                    })()}
+                    {/* Polaroid strip — straight, drag-to-scroll, scales to any number of photos */}
+                    <div className="my-16 md:my-24">
+                        <div ref={stripRef} className="polaroid-strip">
+                            {photos.map((p, i) => (
+                                <figure key={i} className="polaroid-strip-card">
+                                    <img
+                                        src={p.src}
+                                        alt={p.label}
+                                        loading="lazy"
+                                        decoding="async"
+                                        style={{ objectPosition: p.pos || 'center' }}
+                                        draggable={false}
+                                        onContextMenu={(e) => e.preventDefault()}
+                                    />
+                                    <figcaption>{p.label}</figcaption>
+                                </figure>
+                            ))}
+                        </div>
+                        <p className="text-center text-ink/40 text-[10px] font-mono mt-4 tracking-[0.3em] uppercase">
+                            ← drag to scroll →
+                        </p>
+                    </div>
 
                     {/* Education */}
                     <div className="mt-16 md:mt-24">

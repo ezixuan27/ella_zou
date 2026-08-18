@@ -3,9 +3,22 @@ import { RevealOnScroll } from "../RevealOnScroll";
 
 const experiences = [
     {
+        role: "AI Engineering Winter 2027 Intern",
+        company: "PwC",
+        date: "Starting Jan 2027",
+        location: "Dallas, TX",
+        bullets: [],
+    },
+    {
+        role: "Break Through Tech AI Fellow",
+        company: "eCornell",
+        date: "Jun 2026 – Present",
+        bullets: [],
+    },
+    {
         role: "Enterprise Resiliency & Risk Intelligence Intern",
         company: "Wellington Management Company",
-        date: "Dec 2025 – Present",
+        date: "Dec 2025 – Jun 2026",
         location: "Boston, MA",
         bullets: [
             "Built a multi-agent system for risk incident Q&A, querying Snowflake databases to surface trends.",
@@ -16,7 +29,7 @@ const experiences = [
     {
         role: "Research Assistant",
         company: "Northeastern University",
-        date: "Jun 2025 – Present",
+        date: "Jun 2025 – Apr 2026",
         location: "Boston, MA",
         bullets: [
             "Developed AI agents for student Q&A and elicitation simulation using RAG with Pinecone & OpenAI.",
@@ -26,7 +39,7 @@ const experiences = [
     {
         role: "Peer Tutor",
         company: "Knack",
-        date: "Jan 2025 – Present",
+        date: "Jan 2025 – Apr 2026",
         location: "Boston, MA",
         bullets: [
             "Courses: Fundamentals of CS 1 · Discrete Structures · Supply Chain Operations · Foundations of Data Science",
@@ -148,14 +161,16 @@ export const Experience = ({ setPage }) => {
                                                     {exp.location}
                                                 </p>
                                             )}
-                                            <ul className="space-y-2 mt-4">
-                                                {exp.bullets.map((b, j) => (
-                                                    <li key={j} className="text-ink/85 text-base flex items-start gap-3">
-                                                        <span className="text-lava mt-1.5 flex-shrink-0">—</span>
-                                                        <span>{b}</span>
-                                                    </li>
-                                                ))}
-                                            </ul>
+                                            {exp.bullets.length > 0 && (
+                                                <ul className="space-y-2 mt-4">
+                                                    {exp.bullets.map((b, j) => (
+                                                        <li key={j} className="text-ink/85 text-base flex items-start gap-3">
+                                                            <span className="text-lava mt-1.5 flex-shrink-0">—</span>
+                                                            <span>{b}</span>
+                                                        </li>
+                                                    ))}
+                                                </ul>
+                                            )}
                                         </div>
                                     </div>
                                 </RevealOnScroll>

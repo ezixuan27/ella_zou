@@ -1,84 +1,109 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
+
+// --- Tunables ------------------------------------------------------------
+// Fraction of the remaining distance the cat covers each frame. Lower is
+// slower and floatier; higher snaps to the cursor faster.
+const FOLLOW_SPEED = 0.035;
+// How far (px) the cat settles from the cursor, so it trails behind and
+// never covers the pointer.
+const REST_DISTANCE = 55;
+// Resting inset from the screen edge when parked (static / no-mouse mode).
+const MARGIN = 16;
 
 export const XiaoHei = () => {
     const elRef = useRef(null);
-    const dragRef = useRef({ active: false, dx: 0, dy: 0, moved: false });
-    const [pos, setPos] = useState({ x: 16, y: 600 });
 
-    // set initial bottom-left position after mount (when window dims are known)
     useEffect(() => {
         const el = elRef.current;
-        const h = el ? el.offsetHeight : 80;
-        setPos({ x: 16, y: window.innerHeight - h - 16 });
-    }, []);
+        if (!el) return;
 
-    // global pointermove / pointerup for dragging
-    useEffect(() => {
+        let w = el.offsetWidth;
+        let h = el.offsetHeight;
+        // Start bottom-left, matching where the cat used to rest.
+        let x = MARGIN;
+        let y = window.innerHeight - h - MARGIN;
+        let facing = 1; // 1 = face right (gif default), -1 = mirrored to face left
+
+        const apply = () => {
+            el.style.transform = `translate3d(${x}px, ${y}px, 0) scaleX(${facing})`;
+        };
+        apply();
+
+        // Only chase when there's a real hovering pointer and the visitor
+        // hasn't asked to reduce motion. Otherwise the cat just sits parked.
+        const wantsMotion =
+            window.matchMedia("(pointer: fine)").matches &&
+            !window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+        if (!wantsMotion) {
+            const onResize = () => {
+                w = el.offsetWidth;
+                h = el.offsetHeight;
+                x = Math.max(0, Math.min(window.innerWidth - w, x));
+                y = window.innerHeight - h - MARGIN;
+                apply();
+            };
+            window.addEventListener("resize", onResize);
+            return () => window.removeEventListener("resize", onResize);
+        }
+
+        // Target = cursor position. Element is position: fixed, so clientX/Y
+        // (viewport coords) line up directly. Seed it at the cat's own center
+        // so it doesn't lurch before the first mouse move.
+        let targetX = x + w / 2;
+        let targetY = y + h / 2;
+
         const onMove = (e) => {
-            if (!dragRef.current.active) return;
-            const el = elRef.current;
-            if (!el) return;
-            dragRef.current.moved = true;
-            const w = el.offsetWidth;
-            const h = el.offsetHeight;
-            const x = e.clientX - dragRef.current.dx;
-            const y = e.clientY - dragRef.current.dy;
-            setPos({
-                x: Math.max(0, Math.min(window.innerWidth - w, x)),
-                y: Math.max(0, Math.min(window.innerHeight - h, y)),
-            });
+            targetX = e.clientX;
+            targetY = e.clientY;
         };
-        const onEnd = () => {
-            dragRef.current.active = false;
-            document.body.style.cursor = '';
-            document.body.style.userSelect = '';
-        };
-        window.addEventListener('pointermove', onMove);
-        window.addEventListener('pointerup', onEnd);
-        window.addEventListener('pointercancel', onEnd);
-        return () => {
-            window.removeEventListener('pointermove', onMove);
-            window.removeEventListener('pointerup', onEnd);
-            window.removeEventListener('pointercancel', onEnd);
-        };
-    }, []);
-
-    // clamp inside viewport on resize
-    useEffect(() => {
         const onResize = () => {
-            const el = elRef.current;
-            if (!el) return;
-            const w = el.offsetWidth;
-            const h = el.offsetHeight;
-            setPos((p) => ({
-                x: Math.max(0, Math.min(window.innerWidth - w, p.x)),
-                y: Math.max(0, Math.min(window.innerHeight - h, p.y)),
-            }));
+            w = el.offsetWidth;
+            h = el.offsetHeight;
         };
-        window.addEventListener('resize', onResize);
-        return () => window.removeEventListener('resize', onResize);
-    }, []);
+        window.addEventListener("pointermove", onMove);
+        window.addEventListener("resize", onResize);
 
-    const onPointerDown = (e) => {
-        dragRef.current.active = true;
-        dragRef.current.moved = false;
-        dragRef.current.dx = e.clientX - pos.x;
-        dragRef.current.dy = e.clientY - pos.y;
-        document.body.style.cursor = 'grabbing';
-        document.body.style.userSelect = 'none';
-        try { e.currentTarget.setPointerCapture(e.pointerId); } catch {}
-        e.preventDefault();
-    };
+        let raf = 0;
+        const tick = () => {
+            const cx = x + w / 2;
+            const cy = y + h / 2;
+            const dx = targetX - cx;
+            const dy = targetY - cy;
+            const dist = Math.hypot(dx, dy) || 1;
+
+            // Chase only while farther than the rest gap, so the cat eases to
+            // a stop a short distance from the cursor instead of on top of it.
+            if (dist > REST_DISTANCE) {
+                const desiredCx = targetX - (dx / dist) * REST_DISTANCE;
+                const desiredCy = targetY - (dy / dist) * REST_DISTANCE;
+                x += (desiredCx - w / 2 - x) * FOLLOW_SPEED;
+                y += (desiredCy - h / 2 - y) * FOLLOW_SPEED;
+                // Face the way it's travelling (ignore sub-pixel jitter).
+                if (Math.abs(dx) > 2) facing = dx < 0 ? -1 : 1;
+            }
+
+            // Safety net: keep the cat inside the viewport.
+            x = Math.max(0, Math.min(window.innerWidth - w, x));
+            y = Math.max(0, Math.min(window.innerHeight - h, y));
+
+            apply();
+            raf = requestAnimationFrame(tick);
+        };
+        raf = requestAnimationFrame(tick);
+
+        return () => {
+            cancelAnimationFrame(raf);
+            window.removeEventListener("pointermove", onMove);
+            window.removeEventListener("resize", onResize);
+        };
+    }, []);
 
     return (
         <div
             ref={elRef}
-            className="fixed z-30 select-none cursor-grab active:cursor-grabbing touch-none transition-transform duration-300 hover:scale-105"
-            style={{
-                left: pos.x + 'px',
-                top: pos.y + 'px',
-            }}
-            onPointerDown={onPointerDown}
+            className="fixed left-0 top-0 z-30 select-none pointer-events-none"
+            style={{ willChange: "transform" }}
             aria-hidden="true"
         >
             <img
